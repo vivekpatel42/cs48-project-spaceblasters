@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<project name="Space Blasters Project" default="info">
+
+	<property name="src" location="src"/>
+
+	<property name="build" location="build"/>   
+
+	<property name="main" value="com.cs48.projects.games.space_blasters.Menu"/>	
+
+	<path id="Space Blasters.classpath">
+		<pathelement location="build"/>
+		<pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar" />
+	</path>
+
+   	<target name="info">
+      		<echo>Welcome to the Space Blasters project!</echo>
+   	</target>
+   
+	<target name="compile" depends="clean" description="Compiles source files into build directory">
+		<mkdir dir="${build}"/>
+		<javac srcdir="${src}" destdir="${build}"/>
+	</target>
+
+	<target name="clean" description="Cleans up the build directory">
+		<delete dir="${build}" quiet="true"/>
+	</target>
+	
+	<target name="run" depends="compile" description="Runs the Space Blasters game">
+		<java classname="${main}" failonerror="true" fork="yes">
+			<classpath refid="Space Blasters.classpath"/>
+		</java>
+	</target>
+
+	
+</project>

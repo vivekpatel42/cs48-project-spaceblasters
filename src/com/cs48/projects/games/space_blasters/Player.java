@@ -1,4 +1,4 @@
-//package com.cs48.projects.games.space_blasters;
+package com.cs48.projects.games.space_blasters;
 
 public class Player extends SpriteBase {
     public Player(double xPos, double yPos) {

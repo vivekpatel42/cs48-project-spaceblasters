@@ -1,3 +1,5 @@
+package com.cs48.projects.games.space_blasters;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

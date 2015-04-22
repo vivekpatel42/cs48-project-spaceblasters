@@ -1,9 +1,15 @@
-//package com.cs48.projects.games.space_blasters;
+package com.cs48.projects.games.space_blasters;
+
 import java.awt.*;
 import java.awt.event.*;
-import sun.audio.*;
+//import sun.audio.*;
+import javafx.scene.media.*;
 import javax.swing.*;
 import java.io.*;
+
+/**
+ * @author Vivek Patel
+ */
 
 public class Menu extends JPanel {
 
@@ -16,8 +22,11 @@ public class Menu extends JPanel {
         public Menu() {
 		super();
 		this.setSize(600, 400);
-		this.setLayout(new FlowLayout());
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBackground(Color.BLACK);
 		startGame = new JButton("Start Game");
+		ImageIcon img = new ImageIcon("/cs/student/vivek_patel/cs48/cs48-projects-spaceblasters/res/startGameNoSelect.png");
+		startGame.setIcon(img);
 		highScores = new JButton("High Scores");
 		instructions = new JButton("Instructions");
 		options = new JButton("Options");
@@ -28,19 +37,21 @@ public class Menu extends JPanel {
 		this.add(options);
 		this.add(sound);
 		sound.addActionListener(new AL());
-
-		
 	}
-    public static class AL implements ActionListener{
+
+	public static class AL implements ActionListener{
 	       public final void actionPerformed(ActionEvent e){
 		   music();
 	       }
 	}
     
     
-        public static void music() 
-       {        
-	       AudioPlayer MGP = AudioPlayer.player;
+        public static void music() {     
+		String musicTest = "MusicTest.wav";
+		Media hit = new Media(musicTest);
+		MediaPlayer mediaPlayer = new MediaPlayer(hit);
+		mediaPlayer.play();	   
+	       /*AudioPlayer MGP = AudioPlayer.player;
                AudioStream BGM;
                AudioData MD;
 	       ContinuousAudioDataStream loop = null;
@@ -51,13 +62,9 @@ public class Menu extends JPanel {
 	       }
 	       catch(IOException error){}
 	       MGP.start(loop);
-       }
+		*/
+	}
 
-	/*public Menu(int width, int height) {
-		super();
-		this.setSize(width, height);
-		this.setLayout(new FlowLayout());
-	} */
 
 	public static void main(String[] args) {
 		JFrame mainWindow = new JFrame("Space Blasters");
