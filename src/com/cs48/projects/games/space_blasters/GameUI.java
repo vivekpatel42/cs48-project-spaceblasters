@@ -7,9 +7,9 @@ import javax.swing.*;
  * @author Vivek Patel
  */
 
-public class Game extends JPanel {
+public class GameUI extends Mode {
 
-	public Game() {
+	public GameUI() {
 		super();
 	}
 

@@ -2,8 +2,7 @@ package com.cs48.projects.games.space_blasters;
 
 import java.awt.*;
 import java.awt.event.*;
-//import sun.audio.*;
-import javafx.scene.media.*;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.*;
 
@@ -11,13 +10,13 @@ import java.io.*;
  * @author Vivek Patel
  */
 
-public class Menu extends JPanel {
+public class Menu extends Mode {
 
-	private JButton startGame;	
-	private JButton highScores;
-	private JButton instructions;
-	private JButton options;
-        private JButton sound;
+	protected JButton startGame;	
+	protected JButton highScores;
+	protected JButton instructions;
+	protected JButton options;
+        protected JButton sound;
 	
         public Menu() {
 		super();
