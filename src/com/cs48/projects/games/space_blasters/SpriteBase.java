@@ -1,4 +1,4 @@
-package src.cs48.project.game.Space_Blasters;
+package com.cs48.projects.games.space_blasters;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,6 +19,7 @@ public abstract class SpriteBase {
     private double yPos;
     private double speed;
     private BufferedImage image;
+    private String type;
 
     /** The rectangle used for this entity during collisions  resolution */
     private Rectangle me = new Rectangle();
@@ -83,7 +84,7 @@ public abstract class SpriteBase {
      */
     public boolean GetSprite(String SpriteName) {
         try {
-            image = ImageIO.read(new File(SpriteName + ".png"));
+            image = ImageIO.read(new File(SpriteName + ".jpg"));
         } catch (IOException e) {
                 return false;
         }
@@ -101,13 +102,19 @@ public abstract class SpriteBase {
 
         return me.intersects(him);
     }
+    
 
     /**
      * Notification that this entity collided with another.
      *
      * @param other The entity with which this entity collided.
      */
-    public abstract void collidedWith(SpriteBase other);
+    public boolean friendlyCollision(SpriteBase other) {
+	if (type.equals(other.type)) {
+		return true;
+	}
+	return false;
+    }
 
 }
 
