@@ -3,14 +3,21 @@
 <project name="Space Blasters Project" default="info">
 
 	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="main" value="src.cs48.project.game.Space_Blasters.GameUI"/>
 
-	<property name="build" location="build"/>   
+	<property environment="env"/> <!-- load the environment variables -->
+	<property name="webRoot" value="cs48/project/public_html/cs48" />
+	<property name="webBaseURL" value="http://www.cs.ucsb.edu/~ralvarez/cs48" />
+	<property name="projectName" value="SpaceBlasters" />
+	<property name="javadocDest" value="${webRoot}/${projectName}/javadoc" />
+	<property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" />
+	<property name=" javadocDest" value=""/>
 
-	<property name="main" value="com.cs48.projects.games.space_blasters.Menu"/>	
 
 	<path id="Space Blasters.classpath">
 		<pathelement location="build"/>
-		<pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar" />
+		<pathelement location="${main}"/>
 	</path>
 
    	<target name="info">
@@ -31,6 +38,33 @@
 			<classpath refid="Space Blasters.classpath"/>
 		</java>
 	</target>
+	
+	<target name="javadoc" depends="compile">                                                        
+                                                                                                  
+   		<delete dir="javadoc" quiet="true" />                                                          
+		 <javadoc  destdir="javadoc" author="true" version="true" use="true" >                          
+      		<fileset dir="src" includes="**/*.java"/>                                                                                                                                     
+   		</javadoc>                                                                                     
+                                                                                                  
+   		<!-- delete the old javadoc -->                                                                
+   		<delete quiet="true" dir="${javadocDest}" />                                                   
+                                                                                                  
+   		<!-- copy everything you just made to the javadoc destination, and then make it readable -->   
+                                                                                                  
+   		<copy todir="${javadocDest}" >                                                                 
+     		<fileset dir="javadoc"/>                                                                     
+		 </copy>                                                                                        
+                                                                                                  
+   		<!-- Note: this only does the chmod command on the                                             
+                	javadoc subdirectory and its contents.  You MIGHT have to                                 
+        		MANUALLY do the chmod on the parent directories.  However,                                
+        		you should only need to do that once. -->                                                 
+                                                                                                  
+   		<chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
+		 <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />                         
+   		<echo>Javadoc deployed to ${javadocURL}</echo>                                                 
+                                                                                                  
+ 	</target>  
 
 	
 </project>
