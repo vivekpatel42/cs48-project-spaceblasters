@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Mode extends JPanel {
 
-	
+	//0 for Menu, 1 for GameUI
+	private int modeType;
 
 }

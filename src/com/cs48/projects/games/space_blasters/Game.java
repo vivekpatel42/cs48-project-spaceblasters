@@ -4,6 +4,7 @@ import java.io.*;
 
 public class Game {
 
-	private
+	private ResourceManager rm;
+	
 
 }
