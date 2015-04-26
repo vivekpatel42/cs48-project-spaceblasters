@@ -19,6 +19,7 @@ public abstract class SpriteBase {
     private double yPos;
     private double speed;
     private BufferedImage image;
+    private String type;
 
     /** The rectangle used for this entity during collisions  resolution */
     private Rectangle me = new Rectangle();
@@ -101,13 +102,19 @@ public abstract class SpriteBase {
 
         return me.intersects(him);
     }
+    
 
     /**
      * Notification that this entity collided with another.
      *
      * @param other The entity with which this entity collided.
      */
-    public abstract void collidedWith(SpriteBase other);
+    public boolean friendlyCollision(SpriteBase other) {
+	if (type.equals(other.type)) {
+		return true;
+	}
+	return false;
+    }
 
 }
 

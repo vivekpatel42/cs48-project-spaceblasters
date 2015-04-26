@@ -1,10 +1,10 @@
-package src.cs48.project.game.Space_Blasters;
+package com.cs48.projects.games.space_blasters;
 
 import java.awt.*;
 import java.awt.event.*;
-//import sun.audio.*;
-import javafx.scene.media.*;
+import javax.sound.sampled.*;
 import javax.swing.*;
+import java.io.*;
 
 /**
  * @author Vivek Patel
@@ -12,16 +12,16 @@ import javax.swing.*;
 
 public class Menu extends JPanel {
 
-	private JButton startGame;	
-	private JButton highScores;
-	private JButton instructions;
-	private JButton options;
-        private JButton sound;
+	protected JButton startGame;	
+	protected JButton highScores;
+	protected JButton instructions;
+	protected JButton options;
+        protected JButton sound;
 	
         public Menu() {
 		super();
-		this.setSize(600, 400);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		//this.modeType = 0;
+		this.setSize(800, 600);
 		this.setBackground(Color.BLACK);
 		startGame = new JButton("Start Game");
 		ImageIcon img = new ImageIcon("/cs/student/vivek_patel/cs48/cs48-projects-spaceblasters/res/startGameNoSelect.png");
@@ -30,11 +30,11 @@ public class Menu extends JPanel {
 		instructions = new JButton("Instructions");
 		options = new JButton("Options");
 		sound = new JButton("Music");
-		this.add(startGame);
-		this.add(highScores);
-		this.add(instructions);
-		this.add(options);
-		this.add(sound);
+		this.add(startGame, BorderLayout.CENTER);
+		this.add(highScores, BorderLayout.CENTER);
+		this.add(instructions, BorderLayout.CENTER);
+		this.add(options, BorderLayout.CENTER);
+		this.add(sound, BorderLayout.CENTER);
 		sound.addActionListener(new AL());
 	}
 
