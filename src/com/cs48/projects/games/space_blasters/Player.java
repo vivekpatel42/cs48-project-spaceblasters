@@ -1,5 +1,4 @@
-package src.cs48.project.game.Space_Blasters;
-
+package com.cs48.projects.games.space_blasters;
 
 public class Player extends SpriteBase {
 

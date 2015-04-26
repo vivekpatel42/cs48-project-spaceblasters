@@ -1,4 +1,4 @@
-package src.cs48.project.game.Space_Blasters;
+package com.cs48.projects.games.space_blasters;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -84,7 +84,7 @@ public abstract class SpriteBase {
      */
     public boolean GetSprite(String SpriteName) {
         try {
-            image = ImageIO.read(new File(SpriteName + ".png"));
+            image = ImageIO.read(new File(SpriteName + ".jpg"));
         } catch (IOException e) {
                 return false;
         }
