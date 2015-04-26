@@ -3,14 +3,21 @@
 <project name="Space Blasters Project" default="info">
 
 	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="main" value="src.cs48.project.game.Space_Blasters.GameUI"/>
 
-	<property name="build" location="build"/>   
+	<property environment="env"/> <!-- load the environment variables -->
+	<property name="webRoot" value="cs48/project/public_html/cs48" />
+	<property name="webBaseURL" value="http://www.cs.ucsb.edu/~ralvarez/cs48" />
+	<property name="projectName" value="SpaceBlasters" />
+	<property name="javadocDest" value="${webRoot}/${projectName}/javadoc" />
+	<property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" />
+	<property name=" javadocDest" value=""/>
 
-	<property name="main" value="com.cs48.projects.games.space_blasters.Menu"/>	
 
 	<path id="Space Blasters.classpath">
 		<pathelement location="build"/>
-		<pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar" />
+		<pathelement location="${main}"/>
 	</path>
 
    	<target name="info">
