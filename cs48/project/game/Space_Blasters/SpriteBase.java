@@ -1,4 +1,4 @@
-package com.cs48.projects.games.space_blasters;
+package cs48.project.game.Space_Blasters;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,7 +19,16 @@ public abstract class SpriteBase {
     private double yPos;
     private double speed;
     private BufferedImage image;
-    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    protected String type;
 
     /** The rectangle used for this entity during collisions  resolution */
     private Rectangle me = new Rectangle();
@@ -59,6 +68,7 @@ public abstract class SpriteBase {
         this.yPos = yPos;
         this.speed = 1.0;
         this.image = null;
+        this.type ="";
     }
 
     public SpriteBase() {
@@ -66,6 +76,7 @@ public abstract class SpriteBase {
         this.yPos = 0;
         this.speed = 1.0;
         this.image = null;
+        this.type="";
     }
 
     /**

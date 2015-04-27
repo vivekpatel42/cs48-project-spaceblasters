@@ -1,10 +1,11 @@
-package com.cs48.projects.games.space_blasters;
+package cs48.project.game.Space_Blasters;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.sound.sampled.*;
 import javax.swing.*;
-import java.io.*;
 
 /**
  * @author Vivek Patel

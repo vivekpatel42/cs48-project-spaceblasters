@@ -1,4 +1,4 @@
-package com.cs48.projects.games.space_blasters;
+package cs48.project.game.Space_Blasters;
 
 public class Enemy extends SpriteBase {
 
@@ -27,7 +27,7 @@ public class Enemy extends SpriteBase {
 	public void move() {
 		if (this.movement == 1) {
 			move(dx, dy);
-			if ((xPos - (image.getWidth()/2)) == 0 || (xPos + (image.getWidth()/2)) == 800) {
+			if ((this.getxPos() - (this.getImage().getWidth()/2)) == 0 || (this.getxPos() + (this.getImage().getWidth()/2)) == 800) {
 				dx *= -1;
 			}
 		}

@@ -1,4 +1,4 @@
-package com.cs48.projects.games.space_blasters;
+package cs48.project.game.Space_Blasters;
 
 public class Projectile extends SpriteBase {
 

@@ -1,5 +1,6 @@
-package com.cs48.projects.games.space_blasters;
+package cs48.project.game.Space_Blasters;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -9,6 +10,6 @@ import java.awt.*;
 public class Mode extends JPanel {
 
 	//0 for Menu, 1 for GameUI
-	private int modeType;
+	public int modeType;
 
 }
