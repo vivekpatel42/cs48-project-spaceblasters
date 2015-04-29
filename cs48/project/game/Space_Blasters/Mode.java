@@ -7,9 +7,9 @@ import java.awt.*;
  * @author Vivek Patel
  */
 
-public class Mode extends JPanel {
+public class Mode extends Canvas {
 
-	//0 for Menu, 1 for GameUI
+	//0 for GameUI, 1 for Instructions
 	public int modeType;
 
 }
