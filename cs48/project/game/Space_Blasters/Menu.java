@@ -1,7 +1,10 @@
 package cs48.project.game.Space_Blasters;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author Vivek Patel
@@ -15,7 +18,7 @@ public class Menu extends JPanel {
 	protected JButton options;
      //protected JButton sound;
 
-	 public JButton getStartGame() {
+	public JButton getStartGame() {
 		 return startGame;
 	 }
 	public JButton getHighScores() {
@@ -45,40 +48,17 @@ public class Menu extends JPanel {
 		this.add(options, BorderLayout.CENTER);
 		//this.add(sound, BorderLayout.CENTER);
 		//sound.addActionListener(new AL());
-	}
-
-	/*public static class AL implements ActionListener{
-	       public final void actionPerformed(ActionEvent e){
-		   music();
-	       }
-	}
-    
-    
-        public static void music() {     
-		String musicTest = "MusicTest.wav";
-		Media hit = new Media(musicTest);
-		MediaPlayer mediaPlayer = new MediaPlayer(hit);
-		mediaPlayer.play();	   
-	       /*AudioPlayer MGP = AudioPlayer.player;
-               AudioStream BGM;
-               AudioData MD;
-	       ContinuousAudioDataStream loop = null;
-	       try{ 
-	       InputStream soundTest = new FileInputStream("MusicTest.wav"); 
-	       BGM = new AudioStream(soundTest);
-	       AudioPlayer.player.start(BGM);
-	       }
-	       catch(IOException error){}
-	       MGP.start(loop);
-
-	}*/
+	}}
 
 
-	public static void main(String[] args) {
-		JFrame mainWindow = new JFrame("Space Blasters");
-		Menu menu = new Menu();
-		mainWindow.getContentPane().add(menu);
-		mainWindow.setVisible(true);
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-}
+
+
+
+
+
+
+
+
+
+
+
