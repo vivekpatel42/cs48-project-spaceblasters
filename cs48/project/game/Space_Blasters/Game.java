@@ -5,6 +5,12 @@ import java.io.*;
 public class Game {
 
 	private ResourceManager rm;
+
+
+	public static void main(String [ ] args){
+
+
+	}
 	
 
 }

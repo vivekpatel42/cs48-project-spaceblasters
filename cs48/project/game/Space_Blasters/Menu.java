@@ -1,11 +1,7 @@
 package cs48.project.game.Space_Blasters;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author Vivek Patel
@@ -17,29 +13,41 @@ public class Menu extends JPanel {
 	protected JButton highScores;
 	protected JButton instructions;
 	protected JButton options;
-        protected JButton sound;
-	
-        public Menu() {
-		super();
-		//this.modeType = 0;
+     //protected JButton sound;
+
+	 public JButton getStartGame() {
+		 return startGame;
+	 }
+	public JButton getHighScores() {
+		return highScores;
+	}
+	public JButton getInstructions() {
+		return instructions;
+	}
+	public JButton getOptions() {
+		return options;
+	}
+
+	public Menu() {
+
 		this.setSize(800, 600);
 		this.setBackground(Color.BLACK);
 		startGame = new JButton("Start Game");
-		ImageIcon img = new ImageIcon("/cs/student/vivek_patel/cs48/cs48-projects-spaceblasters/res/startGameNoSelect.png");
-		startGame.setIcon(img);
+		//ImageIcon img = new ImageIcon("~/res/startGameNoSelect.png");
+		//startGame.setIcon(img);
 		highScores = new JButton("High Scores");
 		instructions = new JButton("Instructions");
 		options = new JButton("Options");
-		sound = new JButton("Music");
+		//sound = new JButton("Music");
 		this.add(startGame, BorderLayout.CENTER);
 		this.add(highScores, BorderLayout.CENTER);
 		this.add(instructions, BorderLayout.CENTER);
 		this.add(options, BorderLayout.CENTER);
-		this.add(sound, BorderLayout.CENTER);
-		sound.addActionListener(new AL());
+		//this.add(sound, BorderLayout.CENTER);
+		//sound.addActionListener(new AL());
 	}
 
-	public static class AL implements ActionListener{
+	/*public static class AL implements ActionListener{
 	       public final void actionPerformed(ActionEvent e){
 		   music();
 	       }
@@ -62,14 +70,15 @@ public class Menu extends JPanel {
 	       }
 	       catch(IOException error){}
 	       MGP.start(loop);
-		*/
-	}
+
+	}*/
 
 
 	public static void main(String[] args) {
 		JFrame mainWindow = new JFrame("Space Blasters");
 		Menu menu = new Menu();
-		mainWindow.add(menu);
+		mainWindow.getContentPane().add(menu);
 		mainWindow.setVisible(true);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

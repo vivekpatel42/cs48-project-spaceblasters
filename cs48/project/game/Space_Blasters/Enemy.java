@@ -9,6 +9,7 @@ public class Enemy extends SpriteBase {
 	private double dy;
 	
 	public Enemy() {
+		super();
 		lvl = 1;
 		hp = lvl*100;
 		movement = 1;
@@ -16,6 +17,7 @@ public class Enemy extends SpriteBase {
 		dy = 0;
 	}
 	public Enemy(double xDelta, double yDelta){
+		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
 		movement = 1;
