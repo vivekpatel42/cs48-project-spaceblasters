@@ -48,15 +48,6 @@ public abstract class SpriteBase {
         return xPos;
     }
 
-    public void setxPos(double xPos) {
-        this.xPos = xPos;
-    }
-    public void setyPos(double yPos) {
-        this.yPos = yPos;
-    }
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
 
     /**
      * Constructor to determine initial position
@@ -66,7 +57,7 @@ public abstract class SpriteBase {
     public SpriteBase(double xPos, double yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.speed = 1.0;
+        this.speed = 5.0;
         this.image = null;
         this.type ="";
     }
@@ -74,7 +65,7 @@ public abstract class SpriteBase {
     public SpriteBase() {
         this.xPos = 0;
         this.yPos = 0;
-        this.speed = 1.0;
+        this.speed = 5.0;
         this.image = null;
         this.type="";
     }
@@ -95,8 +86,9 @@ public abstract class SpriteBase {
      */
     public boolean GetSprite(String SpriteName) {
         try {
-            image = ImageIO.read(new File(SpriteName + ".jpg"));
+            image = ImageIO.read(new File("res/"+ SpriteName + ".jpg"));
         } catch (IOException e) {
+                System.out.print("unable to find sprite");
                 return false;
         }
         return true;

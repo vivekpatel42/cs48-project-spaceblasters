@@ -5,44 +5,33 @@ public class Enemy extends SpriteBase {
 	private int lvl;
 	private int hp;
 	private int movement;
-	private double dx;
-	private double dy;
+	private double Xdirection=1;
+	private double Ydirection=0;
 	
 	public Enemy() {
 		super();
 		lvl = 1;
 		hp = lvl*100;
 		movement = 1;
-		dx = 1;
-		dy = 0;
+		GetSprite("AngryFace");
 	}
 	public Enemy(double xDelta, double yDelta){
 		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
 		movement = 1;
-		dx = xDelta;
-		dy = yDelta;
-	
+		GetSprite("AngryFace");
 	}
 	//Stub
-	public void move() {
+	public void CalculateMove() {
 		if (this.movement == 1) {
-			move(dx, dy);
-			if ((this.getxPos() - (this.getImage().getWidth()/2)) == 0 || (this.getxPos() + (this.getImage().getWidth()/2)) == 800) {
-				dx *= -1;
+			move(Xdirection, Ydirection);
+			if (this.getxPos() <50 ) {
+				Xdirection = 1;
 			}
+			else if( this.getxPos() >750)
+				Xdirection =-1;
 		}
-		else if (this.movement == 2) {
-		
-		
-		}
-		else if (this.movement == 3) {
-		
-		
-		
-		}
-		
 		
 		
 	}
