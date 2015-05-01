@@ -16,7 +16,7 @@ public class GameUI extends Mode {
 	}
 	
 	
-	public void paintComponent(Graphics g) {
+	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		
 	}
