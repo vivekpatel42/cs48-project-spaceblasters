@@ -41,10 +41,10 @@ public abstract class SpriteBase {
     public double getSpeed() {
         return speed;
     }
-    public double getyPos() {
+    public double getYPos() {
         return yPos;
     }
-    public double getxPos() {
+    public double getXPos() {
         return xPos;
     }
 
@@ -101,7 +101,7 @@ public abstract class SpriteBase {
      */
     public boolean collidesWith(SpriteBase other) {
         me.setBounds((int) xPos, (int) yPos, image.getWidth(), image.getHeight());
-        him.setBounds((int) other.getxPos(),(int) other.getyPos(),other.getImage().getWidth(),other.getImage().getHeight());
+        him.setBounds((int) other.getXPos(),(int) other.getYPos(),other.getImage().getWidth(),other.getImage().getHeight());
 
         return me.intersects(him);
     }
@@ -113,10 +113,7 @@ public abstract class SpriteBase {
      * @param other The entity with which this entity collided.
      */
     public boolean friendlyCollision(SpriteBase other) {
-	if (type.equals(other.type)) {
-		return true;
-	}
-	return false;
+        return type.equals(other.type);
     }
 
 }
