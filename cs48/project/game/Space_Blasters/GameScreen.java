@@ -1,3 +1,6 @@
+import cs48.project.game.Space_Blasters.BufferedImageLoader;
+import cs48.project.game.Space_Blasters.SpriteSheet;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.image.BufferStrategy;
