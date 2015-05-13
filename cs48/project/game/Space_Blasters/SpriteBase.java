@@ -19,15 +19,6 @@ public abstract class SpriteBase {
     private double yPos;
     private double speed;
     private BufferedImage image;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     protected String type;
 
     /** The rectangle used for this entity during collisions  resolution */
@@ -35,6 +26,16 @@ public abstract class SpriteBase {
     /** The rectangle used for other entities during collision resolution */
     private Rectangle him = new Rectangle();
 
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
     public BufferedImage getImage() {
         return image;
     }

@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
+
 
 /**
  * @author Richard Alvarez
@@ -92,19 +92,6 @@ public class Game extends Canvas {
      */
     private boolean gameRunning = true;
     /**
-     * The list of all the entities that exist in our game
-     */
-    private ArrayList entities = new ArrayList();
-    /**
-     * The list of entities that need to be removed from the game this loop
-     */
-    private ArrayList removeList = new ArrayList();
-    /** The entity representing the player */
-    /**
-     * The speed at which the player's ship should move (pixels/sec)
-     */
-    private double moveSpeed = 300;
-    /**
      * The time at which last fired a shot
      */
     private long lastFire = 0;
@@ -145,18 +132,12 @@ public class Game extends Canvas {
      * True if we are firing
      */
     private boolean firePressed = false;
-    /**
-     * True if game logic needs to be applied this loop, normally as a result of a game event
-     */
-    private boolean logicRequiredThisLoop = false;
 
 
     public void gameLoop() {
         long lastLoopTime = System.currentTimeMillis();
 
         // keep looping round til the game ends
-
-
         while (gameRunning) {
             // work out how long its been since the last update, this
             // will be used to calculate how far the entities should
@@ -174,81 +155,6 @@ public class Game extends Canvas {
             g.fillRect(0, 0, 800, 600);
 
 
-            //Calls on the player class gto spawn a projectile. Currently does not include the projectile position
-            if (firePressed) {
-                Projectile shot = rm.getMainPlayer().TryToFire();
-                if (shot == null) ;
-                else
-                    rm.getProjectileArr().add(shot);
-            }
-
-
-            // cycle round asking each entity to move itself
-
-            if (!waitingForKeyPress) {
-                for (int i = 0; i < rm.getEnemyArr().size() - 1; i++) {
-                    rm.getEnemyArr().get(i).CalculateMove();
-
-                }
-                for (int i = 0; i < rm.getProjectileArr().size() - 1; i++) {
-                    rm.getProjectileArr().get(i).CalculateMove();
-
-                }
-            }
-
-            // cycle round drawing all the entities we have in the game
-
-            for (int i = 0; i < rm.getEnemyArr().size() - 1; i++) {
-                g.drawImage(rm.getEnemyArr().get(i).getImage(), null, (int) rm.getEnemyArr().get(i).getXPos(), (int) rm.getEnemyArr().get(i).getYPos());
-            }
-            for (int i = 0; i < rm.getProjectileArr().size() - 1; i++) {
-                g.drawImage(rm.getProjectileArr().get(i).getImage(), null, (int) rm.getProjectileArr().get(i).getXPos(), (int) rm.getProjectileArr().get(i).getYPos());
-            }
-            g.drawImage(rm.getMainPlayer().getImage(), null, (int) rm.getMainPlayer().getXPos(), (int) rm.getMainPlayer().getYPos());
-
-
-            // DO COLLISION DETECTION LOOPS HERE
-
-
-
-
-		/*
-
-		 entities.removeAll(removeList);
-		 removeList.clear();
-
-		 // if a game event has indicated that game logic should
-
-		 // be resolved, cycle round every entity requesting that
-
-		 // their personal logic should be considered.
-
-		 if (logicRequiredThisLoop) {
-			 for (int i=0;i<entities.size();i++) {
-				 Entity entity = (Entity) entities.get(i);
-				 entity.doLogic();
-			 }
-
-			 logicRequiredThisLoop = false;
-		 }
-*/
-            // if we're waiting for an "any key" press then draw the
-            // current message
-
-            if (waitingForKeyPress) {
-                g.setColor(Color.white);
-                g.drawString(message, (800 - g.getFontMetrics().stringWidth(message)) / 2, 250);
-                g.drawString("Press space to start", (800 - g.getFontMetrics().stringWidth("Press space to start")) / 2, 300);
-            }
-
-            // finally, we've completed drawing so clear up the graphics
-
-            // and flip the buffer over
-
-            g.dispose();
-            strategy.show();
-
-            // if we're pressing fire, attempt to fire
 
 
             // resolve the movement of the ship. First assume the ship
@@ -271,6 +177,64 @@ public class Game extends Canvas {
                 rm.getMainPlayer().move(0, 1);
             }
 
+
+            // cycle round asking each entity to move itself
+
+            if (!waitingForKeyPress) {
+                for (int i = 0; i < rm.getEnemyArr().size(); i++) {
+                    rm.getEnemyArr().get(i).CalculateMove();
+
+                }
+                for (int i = 0; i < rm.getProjectileArr().size(); i++) {
+                    rm.getProjectileArr().get(i).CalculateMove();
+
+                }
+            }
+
+            // if we're pressing fire, attempt to fire
+
+            //Calls on the player class to spawn a projectile. Currently does not include the projectile position
+            if (firePressed) {
+                Projectile shot = rm.getMainPlayer().TryToFire();
+                if (shot == null) ;
+                else
+                    rm.getProjectileArr().add(shot);
+            }
+
+
+
+            // cycle round drawing all the entities we have in the game
+
+            for (int i = 0; i < rm.getEnemyArr().size(); i++) {
+                g.drawImage(rm.getEnemyArr().get(i).getImage(), null, (int) rm.getEnemyArr().get(i).getXPos(), (int) rm.getEnemyArr().get(i).getYPos());
+            }
+            for (int i = 0; i < rm.getProjectileArr().size() ; i++) {
+                g.drawImage(rm.getProjectileArr().get(i).getImage(), null, (int) rm.getProjectileArr().get(i).getXPos(), (int) rm.getProjectileArr().get(i).getYPos());
+            }
+            g.drawImage(rm.getMainPlayer().getImage(), null, (int) rm.getMainPlayer().getXPos(), (int) rm.getMainPlayer().getYPos());
+
+
+            // DO COLLISION DETECTION LOOPS HERE
+
+
+
+
+            // if we're waiting for an "any key" press then draw the
+            // current message
+
+            if (waitingForKeyPress) {
+                g.setColor(Color.white);
+                g.drawString(message, (800 - g.getFontMetrics().stringWidth(message)) / 2, 250);
+                g.drawString("Press space to start", (800 - g.getFontMetrics().stringWidth("Press space to start")) / 2, 300);
+            }
+
+            // finally, we've completed drawing so clear up the graphics
+
+            // and flip the buffer over
+
+            g.dispose();
+            strategy.show();
+
             // finally pause for a bit. Note: this should run us at about
 
             // 100 fps but on windows this might vary each loop due to
@@ -278,7 +242,7 @@ public class Game extends Canvas {
             // a bad implementation of timer
 
             try {
-                Thread.sleep(10);
+                Thread.sleep(12);
             } catch (Exception e) {
             }
         }

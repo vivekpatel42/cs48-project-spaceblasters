@@ -1,16 +1,28 @@
 package cs48.project.game.Space_Blasters;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 public class Player extends SpriteBase {
 
     public long lastFire = 0;
-    public long firingInterval = 400;
+    public long firingInterval = 500;
 	private int lvl;
 	private int hp;
 	private int exp;
-	
+    private BufferedImage spriteSheet = null;
+
     public Player(double xPos, double yPos) {
         super(xPos, yPos);
-        GetSprite("Player");
+        //GetSprite("Player");
+        BufferedImageLoader loader = new BufferedImageLoader();
+        try {
+            spriteSheet = loader.loadImage("GABE.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SpriteSheet ss = new SpriteSheet(spriteSheet);
+        this.setImage(ss.grabImage(1, 1, 32, 33));
         this.setType("Player");
         exp = 0;
         hp = 100;
