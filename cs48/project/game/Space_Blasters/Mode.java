@@ -10,6 +10,6 @@ import java.awt.*;
 public class Mode extends Canvas {
 
 	//0 for GameUI, 1 for Instructions
-	public int modeType;
+	protected int modeType;
 
 }

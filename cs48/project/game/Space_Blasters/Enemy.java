@@ -26,10 +26,10 @@ public class Enemy extends SpriteBase {
 	public void CalculateMove() {
 		if (this.movement == 1) {
 			move(Xdirection, Ydirection);
-			if (this.getxPos() <50 ) {
+			if (this.getXPos() <50 ) {
 				Xdirection = 1;
 			}
-			else if( this.getxPos() >750)
+			else if( this.getXPos() >750)
 				Xdirection =-1;
 		}
 		
