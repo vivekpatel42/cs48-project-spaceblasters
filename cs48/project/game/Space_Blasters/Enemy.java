@@ -33,20 +33,17 @@ public class Enemy extends SpriteBase {
 			e.printStackTrace();
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
-		this.setImage(ss.grabImage(3,1,32,32));
+		this.setImage(ss.grabImage(3, 1, 32, 32));
 	}
 	//Stub
 	public void CalculateMove() {
 		if (this.movement == 1) {
 			move(Xdirection, Ydirection);
-			if (this.getXPos() <50 ) {
+			if (this.getXPos() < 50) {
 				Xdirection = 1;
-			}
-			else if( this.getXPos() >750)
-				Xdirection =-1;
-		}
-		
-		
-	}
+			} else if (this.getXPos() > 750)
+				Xdirection = -1;
 
+		}
+	}
 }
