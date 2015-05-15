@@ -7,9 +7,8 @@ import java.awt.*;
  * @author Vivek Patel
  */
 
-public class Mode extends Canvas {
+public abstract class Mode extends Canvas {
 
-	//0 for GameUI, 1 for Instructions
-	protected int modeType;
+    //public abstract void drawMode();
 
 }

@@ -10,6 +10,7 @@ public class Player extends SpriteBase {
 	private int lvl;
 	private int hp;
 	private int exp;
+    private long score;
     private BufferedImage spriteSheet = null;
 
     public Player(double xPos, double yPos) {
@@ -52,6 +53,15 @@ public class Player extends SpriteBase {
         lastFire = System.currentTimeMillis();
         return new Projectile(this.getXPos(), this.getYPos());
     }
+
+    public long getScore() {
+        return this.score;
+    }
+
+    public void setScore(long score) {
+        this.score = score;
+    }
+
     @Override
     public boolean friendlyCollision(SpriteBase other) {
         return true; //STUB

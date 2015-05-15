@@ -37,6 +37,7 @@ public class Game extends Canvas {
         panel.setPreferredSize(new Dimension(800, 600));
         panel.setLayout(null);
 
+
         // setup our canvas size and put it into the content of the frame
 
         setBounds(0, 0, 800, 600);
@@ -134,6 +135,7 @@ public class Game extends Canvas {
      */
     private boolean firePressed = false;
 
+    private long playerScore;
 
     public void gameLoop() {
         long lastLoopTime = System.currentTimeMillis();
@@ -154,7 +156,9 @@ public class Game extends Canvas {
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
             g.setColor(Color.black);
             g.fillRect(0, 0, 800, 600);
-
+            playerScore = rm.getMainPlayer().getScore();
+            g.setColor(Color.GREEN);
+            g.drawString("Score: " + Long.toString(playerScore), 30, 575);
 
 
 

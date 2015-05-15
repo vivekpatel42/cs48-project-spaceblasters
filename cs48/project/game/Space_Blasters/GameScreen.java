@@ -14,7 +14,7 @@ import java.io.IOException;
 */
 
 
-public class GameScreen extends Canvas implements Runnable {
+public class GameScreen extends Mode implements Runnable {
 
     public static final int WIDTH = 320;
     public static final int HEIGHT = WIDTH / 12 * 9;
@@ -24,7 +24,6 @@ public class GameScreen extends Canvas implements Runnable {
     private Thread thread;
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage spriteSheet = null;
-
     private BufferedImage player;
     private BufferedImage enemy;
 
@@ -122,7 +121,6 @@ public class GameScreen extends Canvas implements Runnable {
         game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-
         JFrame frame = new JFrame(game.TITLE);
         frame.add(game);
         frame.pack();
