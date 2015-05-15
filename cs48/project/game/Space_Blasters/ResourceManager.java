@@ -38,6 +38,7 @@ public class ResourceManager {
             }}
         for (int i = 0; i<toDelete.size(); i++){
             this.getEnemyArr().remove(toDelete.get(i));
+            this.getMainPlayer().increaseScore(1000);
         } //END FIRST COLLISION SET
         //COLLISION FOR PLAYER
         for (int i = 0;i< this.getProjectileArr().size(); i++){

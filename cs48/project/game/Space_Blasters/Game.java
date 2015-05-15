@@ -158,9 +158,10 @@ public class Game extends Canvas {
             g.fillRect(0, 0, 800, 600);
             playerScore = rm.getMainPlayer().getScore();
             g.setColor(Color.GREEN);
-            g.drawString("Score: " + Long.toString(playerScore), 30, 575);
+            g.drawString("Score: " + Long.toString(playerScore)+ "  Health:" + rm.getMainPlayer().getHp(), 30, 575);
 
-
+            if (rm.getEnemyArr().size() == 0)
+                rm.GenerateEnemies();
 
             // resolve the movement of the ship. First assume the ship
 
@@ -202,7 +203,11 @@ public class Game extends Canvas {
                 if (!(shot == null))
                     rm.getProjectileArr().add(shot);
             }
-
+            for (int i = 0; i < rm.getEnemyArr().size(); i++){
+                Projectile shot = rm.getEnemyArr().get(i).TryToFire();
+                if (!(shot == null))
+                    rm.getProjectileArr().add(shot);
+            }
 
 
             // cycle round drawing all the entities we have in the game

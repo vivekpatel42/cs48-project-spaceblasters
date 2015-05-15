@@ -5,6 +5,8 @@ import java.io.IOException;
 
 public class Enemy extends SpriteBase {
 
+	public long lastFire = 0;
+	public long firingInterval = 700;
 	private int lvl;
 	private int hp;
 	private int movement;
@@ -34,6 +36,15 @@ public class Enemy extends SpriteBase {
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		this.setImage(ss.grabImage(3, 1, 32, 32));
+	}
+	public Projectile TryToFire (){
+		// check that we have waiting long enough to fire
+		if (System.currentTimeMillis() - lastFire < firingInterval) {
+			return null;
+		}
+		// if we waited long enough, create the shot entity, and record the time.
+		lastFire = System.currentTimeMillis();
+		return new Projectile(this.getXPos(), this.getYPos(), false);
 	}
 	//Stub
 	public void CalculateMove() {

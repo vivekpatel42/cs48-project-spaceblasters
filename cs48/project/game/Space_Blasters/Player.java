@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Player extends SpriteBase {
 
     public long lastFire = 0;
-    public long firingInterval = 500;
+    public long firingInterval = 400;
 	private int hp;
 	private int exp;
     private long score = 0;
@@ -57,8 +57,12 @@ public class Player extends SpriteBase {
         return this.score;
     }
 
-    public void setScore(long score) {
-        this.score = score;
+    public int getHp() {
+        return hp;
+    }
+
+    public void increaseScore(long score) {
+        this.score += score;
     }
 
     @Override

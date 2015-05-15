@@ -16,7 +16,7 @@ public class Projectile extends SpriteBase {
 			move(0, -1.2);
 		}
 		else
-			move (0, 3);
+			move (0, 1.1);
 	}
 
 	public Projectile(double xPos, double yPos, boolean friend) {
