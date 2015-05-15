@@ -1,9 +1,19 @@
 # cs48-project-spaceblasters
 Source code repo for Space Blasters game (CS48 project)
+ 
+Running Instructions:
+	Step 1: go to root directory and use command "ant compile"
+	To run Game, do: (In the root directory)
+	   java cs48.project.game.Space_Blasters.Game
+	To run the Menu, do:
+   	   java cs48.project.game.Space_Blasters.Menu
+
+
+
 
 user instruction:
 
-use "wasd" to control the spaceship, moving forward, left, downward and right respectively. 
+use "Arrow Keys" to control the spaceship, moving forward, left, downward and right respectively. 
 
 "space" for shooting.
 

@@ -1,7 +1,5 @@
 package cs48.project.game.Space_Blasters;
 
-import com.sun.prism.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Graphics;
