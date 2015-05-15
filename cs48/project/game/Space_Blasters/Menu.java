@@ -65,6 +65,8 @@ public class Menu implements ActionListener {
             frame.setContentPane(panel);
         } else if (button == Instructions) {
             frame.remove(menu);
+            panel = new Instructions();
+            panel.add(ReturnMenu);
             frame.setContentPane(panel);
         } else if (button == Highscores) {
             frame.remove(menu);
