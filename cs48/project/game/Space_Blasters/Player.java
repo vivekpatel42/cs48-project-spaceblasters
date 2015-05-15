@@ -17,7 +17,7 @@ public class Player extends SpriteBase {
         //GetSprite("Player");
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            spriteSheet = loader.loadImage("GABE.png");
+            spriteSheet = loader.loadImage("sprite_sheet.png");
         } catch (IOException e) {
             e.printStackTrace();
         }

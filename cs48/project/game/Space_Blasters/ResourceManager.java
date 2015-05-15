@@ -52,8 +52,8 @@ public class ResourceManager {
     }
 
     public void GenerateEnemies() {
-        for (int i = 0; i <= 6; i++) {
-            Enemy enemy = new Enemy(70 * i, 50 * i);
+        for (int i = 0; i <= 5; i++) {
+            Enemy enemy = new Enemy(100 * i - 600, 50 * i);
             enemyArr.add(enemy);
         }
 

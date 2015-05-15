@@ -22,21 +22,24 @@ public class Projectile extends SpriteBase {
 	public Projectile(double xPos, double yPos, boolean friend) {
 		super(xPos, yPos);
 		BufferedImageLoader loader = new BufferedImageLoader();
+		friendly = friend;
 		try {
-			spriteSheet = loader.loadImage("GABE.png");
+			spriteSheet = loader.loadImage("sprite_sheet.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
-		this.setImage(ss.grabImage(2, 1, 32, 33));
-		friendly = friend;
+		int bulletChoice = 2;
+		if (!(friendly))
+			bulletChoice = 4;
+		this.setImage(ss.grabImage(bulletChoice, 1, 32, 33));
 	}
 
 	public Projectile(double xPos, double yPos) {
 		super(xPos, yPos);
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			spriteSheet = loader.loadImage("GABE.png");
+			spriteSheet = loader.loadImage("sprite_sheet.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Projectile not Found");
