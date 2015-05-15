@@ -1,3 +1,5 @@
+package cs48.project.game.Space_Blasters;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.image.BufferStrategy;

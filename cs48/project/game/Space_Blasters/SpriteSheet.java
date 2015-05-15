@@ -1,3 +1,6 @@
+package cs48.project.game.Space_Blasters;
+
+
 import java.awt.image.BufferedImage;
 
 public class SpriteSheet{
