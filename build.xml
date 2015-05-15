@@ -2,9 +2,10 @@
 
 <project name="Space Blasters Project" default="info">
 
-	<property name="src" location="src"/>
+	<property name="src" location="cs48"/>
 	<property name="build" location="build"/>
-	<property name="main" value="src.cs48.project.game.Space_Blasters.GameUI"/>
+	<property name="menu" value="cs48.project.game.Space_Blasters.Menu"/>
+	<property name="main" value="cs48.project.game.Space_Blasters.Game"/>
 
 	<property environment="env"/> <!-- load the environment variables -->
 	<property name="webRoot" value="cs48/project/public_html/cs48" />
@@ -35,6 +36,12 @@
 	
 	<target name="run" depends="compile" description="Runs the Space Blasters game">
 		<java classname="${main}" failonerror="true" fork="yes">
+			<classpath refid="Space Blasters.classpath"/>
+		</java>
+	</target>
+
+	<target name="menu" depends="compile" description="Runs the Space Blasters menu">
+		<java classname="${menu}" failonerror="true" fork="yes">
 			<classpath refid="Space Blasters.classpath"/>
 		</java>
 	</target>

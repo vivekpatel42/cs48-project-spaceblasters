@@ -388,9 +388,9 @@ public class Game extends Canvas {
      * instance of class which will start the display and game
      * loop.
      *
-     * @param argv The arguments that are passed into our game
+     * @param args The arguments that are passed into our game
      */
-    public static void main(String argv[]) {
+    public static void main(String[] args) {
 
         Game g = new Game();
         //new Thread(new GameMusic()).start();
