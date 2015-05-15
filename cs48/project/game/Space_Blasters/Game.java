@@ -302,7 +302,6 @@ public class Game extends Canvas {
             if (waitingForKeyPress) {
                 return;
             }
-
             if (e.getKeyCode() == KeyEvent.VK_UP)
                 upPressed = true;
             if (e.getKeyCode() == KeyEvent.VK_DOWN)
@@ -315,6 +314,16 @@ public class Game extends Canvas {
             }
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 firePressed = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W)
+                upPressed = true;
+            if (e.getKeyCode() == KeyEvent.VK_S)
+                downPressed = true;
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                rightPressed = true;
             }
         }
 
@@ -341,6 +350,16 @@ public class Game extends Canvas {
             }
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 firePressed = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W)
+                upPressed = false;
+            if (e.getKeyCode() == KeyEvent.VK_S)
+                downPressed = false;
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                leftPressed = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                rightPressed = false;
             }
         }
 
