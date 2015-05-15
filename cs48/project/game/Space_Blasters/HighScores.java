@@ -30,6 +30,8 @@ public class HighScores extends JPanel {
         readFile();
         String[] columnNames = {"Names", "Scores"};
         JTable scoreTable = new JTable(tableData, columnNames);
+        scoreTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        scoreTable.setFillsViewportHeight(true);
         this.add(scoreTable, BorderLayout.CENTER);
     }
 

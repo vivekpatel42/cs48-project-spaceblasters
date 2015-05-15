@@ -73,6 +73,9 @@ public class Menu implements ActionListener {
             frame.setContentPane(panel);
         } else if (button == ReturnMenu) {
             frame.remove(panel);
+            panel = new JPanel();
+            panel.setBackground(Color.black);
+            panel.add(ReturnMenu);
             frame.setContentPane(menu);
         }
         frame.validate();
