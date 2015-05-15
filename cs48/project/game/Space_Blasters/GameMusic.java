@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by richa_000 on 5/13/2015.
+ * Created by Richard Alvarez on 5/13/2015.
  */
 public class GameMusic implements Runnable {
 

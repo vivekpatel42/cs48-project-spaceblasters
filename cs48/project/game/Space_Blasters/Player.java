@@ -7,10 +7,9 @@ public class Player extends SpriteBase {
 
     public long lastFire = 0;
     public long firingInterval = 500;
-	private int lvl;
 	private int hp;
 	private int exp;
-    private long score;
+    private long score = 0;
     private BufferedImage spriteSheet = null;
 
     public Player(double xPos, double yPos) {

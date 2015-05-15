@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
+
 
 
 /**
@@ -166,9 +166,8 @@ public class Game extends Canvas {
 
             // isn't moving. If either cursor key is pressed then
 
-            // update the movement appropraitely
+            // update the movement appropriately
 
-            //ship.setHorizontalMovement(0);
 
             if ((leftPressed) && (!rightPressed)) {
                 rm.getMainPlayer().move(-1, 0);
@@ -200,7 +199,7 @@ public class Game extends Canvas {
             //Calls on the player class to spawn a projectile. Currently does not include the projectile position
             if (firePressed) {
                 Projectile shot = rm.getMainPlayer().TryToFire();
-                if (!(shot == null)) ;
+                if (!(shot == null))
                     rm.getProjectileArr().add(shot);
             }
 
@@ -218,7 +217,7 @@ public class Game extends Canvas {
 
 
             // DO COLLISION DETECTION by calling the resource manager
-            if (!waitingForKeyPress){
+            if (!waitingForKeyPress && !(rm.getProjectileArr() == null)){
                 rm.Collisions();
             }
 

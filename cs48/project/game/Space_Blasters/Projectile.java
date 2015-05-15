@@ -21,7 +21,6 @@ public class Projectile extends SpriteBase {
 
 	public Projectile(double xPos, double yPos, boolean friend) {
 		super(xPos, yPos);
-		//GetSprite("bullet");
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			spriteSheet = loader.loadImage("GABE.png");
@@ -35,12 +34,12 @@ public class Projectile extends SpriteBase {
 
 	public Projectile(double xPos, double yPos) {
 		super(xPos, yPos);
-		//GetSprite("bullet");
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			spriteSheet = loader.loadImage("GABE.png");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("Projectile not Found");
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		this.setImage(ss.grabImage(2, 1, 32, 33));
