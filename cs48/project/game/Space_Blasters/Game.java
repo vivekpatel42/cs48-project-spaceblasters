@@ -391,7 +391,6 @@ public class Game extends Canvas {
      * @param args The arguments that are passed into our game
      */
     public static void main(String[] args) {
-
         Game g = new Game();
         //new Thread(new GameMusic()).start();
         // Start the main game loop, note: this method will not
@@ -402,4 +401,5 @@ public class Game extends Canvas {
 
         g.gameLoop();
     }
+
 }
