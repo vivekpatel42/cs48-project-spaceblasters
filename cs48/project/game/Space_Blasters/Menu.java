@@ -45,7 +45,7 @@ public class Menu implements ActionListener {
         menu.add(Instructions, BorderLayout.CENTER);
 
 
-        frame = new JFrame("Frame Display Test");
+        frame = new JFrame("Space Blasters");
         // If you running your program from cmd, this line lets it comes
         // out of cmd when you click the top-right  RED Button.
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -68,6 +68,8 @@ public class Menu implements ActionListener {
             frame.setContentPane(panel);
         } else if (button == Highscores) {
             frame.remove(menu);
+            panel = new HighScores();
+            panel.add(ReturnMenu);
             frame.setContentPane(panel);
         } else if (button == ReturnMenu) {
             frame.remove(panel);
@@ -88,7 +90,7 @@ public class Menu implements ActionListener {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TestDisplay();
+                new Menu();
             }
         });
     }

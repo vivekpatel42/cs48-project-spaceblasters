@@ -393,7 +393,7 @@ public class Game extends Canvas {
     public static void main(String argv[]) {
 
         Game g = new Game();
-        new Thread(new GameMusic()).start();
+        //new Thread(new GameMusic()).start();
         // Start the main game loop, note: this method will not
 
         // return until the game has finished running. Hence we are
