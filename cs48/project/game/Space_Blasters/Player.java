@@ -27,7 +27,12 @@ public class Player extends SpriteBase {
         exp = 0;
         hp = 100;
     }
-
+    public boolean GotShot(){
+        hp -= 50;
+        if (hp <= 0)
+            return true;
+        return false;
+    }
     public Player() {
         super();
         GetSprite("Player");

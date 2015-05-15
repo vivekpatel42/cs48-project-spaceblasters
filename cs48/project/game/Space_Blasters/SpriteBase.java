@@ -101,7 +101,7 @@ public abstract class SpriteBase {
      * @return true if collision is detected collision is determined by the abstract method collidedWith
      */
     public boolean collidesWith(SpriteBase other) {
-        me.setBounds((int) xPos, (int) yPos, image.getWidth(), image.getHeight());
+        me.setBounds((int) xPos, (int) yPos, this.getImage().getWidth(), this.getImage().getHeight());
         him.setBounds((int) other.getXPos(),(int) other.getYPos(),other.getImage().getWidth(),other.getImage().getHeight());
 
         return me.intersects(him);

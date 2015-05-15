@@ -7,6 +7,10 @@ public class Projectile extends SpriteBase {
 	boolean friendly = true;
 	private BufferedImage spriteSheet = null;
 
+	public boolean isFriendly() {
+		return friendly;
+	}
+
 	public void CalculateMove(){
 		if (friendly){
 			move(0, -1.2);
@@ -15,9 +19,18 @@ public class Projectile extends SpriteBase {
 			move (0, 3);
 	}
 
-	public Projectile() {
-		super();
-		GetSprite("bullet");
+	public Projectile(double xPos, double yPos, boolean friend) {
+		super(xPos, yPos);
+		//GetSprite("bullet");
+		BufferedImageLoader loader = new BufferedImageLoader();
+		try {
+			spriteSheet = loader.loadImage("GABE.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		this.setImage(ss.grabImage(2, 1, 32, 33));
+		friendly = friend;
 	}
 
 	public Projectile(double xPos, double yPos) {

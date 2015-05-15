@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 
 /**
@@ -195,8 +196,7 @@ public class Game extends Canvas {
             //Calls on the player class to spawn a projectile. Currently does not include the projectile position
             if (firePressed) {
                 Projectile shot = rm.getMainPlayer().TryToFire();
-                if (shot == null) ;
-                else
+                if (!(shot == null)) ;
                     rm.getProjectileArr().add(shot);
             }
 
@@ -213,8 +213,10 @@ public class Game extends Canvas {
             g.drawImage(rm.getMainPlayer().getImage(), null, (int) rm.getMainPlayer().getXPos(), (int) rm.getMainPlayer().getYPos());
 
 
-            // DO COLLISION DETECTION LOOPS HERE
-
+            // DO COLLISION DETECTION by calling the resource manager
+            if (!waitingForKeyPress){
+                rm.Collisions();
+            }
 
 
 
