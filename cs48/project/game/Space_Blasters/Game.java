@@ -352,7 +352,7 @@ public class Game extends Canvas {
          */
         public void keyTyped(KeyEvent e) {
             // if we're waiting for a "any key" type then
-            // check if we've recieved any recently. We may
+            // check if we've received any recently. We may
 
             // have had a keyType() event from the user releasing
 
@@ -361,7 +361,7 @@ public class Game extends Canvas {
 
             if (waitingForKeyPress) {
                 if (pressCount == 1) {
-                    // since we've now recieved our key typed
+                    // since we've now received our key typed
 
                     // event we can mark it as such and start
 
@@ -393,7 +393,7 @@ public class Game extends Canvas {
     public static void main(String[] args) {
 
         Game g = new Game();
-        //new Thread(new GameMusic()).start();
+        new Thread(new GameMusic()).start();
         // Start the main game loop, note: this method will not
 
         // return until the game has finished running. Hence we are

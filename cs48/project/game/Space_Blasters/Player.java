@@ -14,7 +14,6 @@ public class Player extends SpriteBase {
 
     public Player(double xPos, double yPos) {
         super(xPos, yPos);
-        //GetSprite("Player");
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("sprite_sheet.png");
