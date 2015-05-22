@@ -11,7 +11,7 @@ public class Enemy extends SpriteBase {
 	private int hp;
 	private int movement;
 	private double Xdirection=1;
-	private double Ydirection=0;
+	private double Ydirection=1;
 	private BufferedImage spriteSheet = null;
 
 
@@ -19,14 +19,14 @@ public class Enemy extends SpriteBase {
 		super();
 		lvl = 1;
 		hp = lvl*100;
-		movement = 1;
+		movement = 2;
 		GetSprite("AngryFace");
 	}
 	public Enemy(double xDelta, double yDelta){
 		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
-		movement = 1;
+		movement = 2;
 		//GetSprite("AngryFace");
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
@@ -54,7 +54,20 @@ public class Enemy extends SpriteBase {
 				Xdirection = 1;
 			} else if (this.getXPos() > 750)
 				Xdirection = -1;
-
 		}
+        else if (this.movement == 2) {
+            move(Xdirection, Ydirection);
+            if (this.getXPos() < 50) {
+                Xdirection = 1;
+            } else if (this.getXPos() > 750)
+                Xdirection = -1;
+            if (this.getYPos() < 50) {
+                Ydirection = 1;
+            } else if (this.getYPos() > 150)
+                Ydirection = -1;
+        }
+        else if (this.movement == 3) {
+
+        }
 	}
 }
