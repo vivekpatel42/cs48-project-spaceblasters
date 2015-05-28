@@ -20,7 +20,7 @@ public class GameMusic implements Runnable {
 // from a wave File
         Clip clip;
         AudioInputStream audioIn;
-        File soundFile = new File("res/tetris.wav");
+        File soundFile = new File("res/BlastersTheme.wav");
         try {
             audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();

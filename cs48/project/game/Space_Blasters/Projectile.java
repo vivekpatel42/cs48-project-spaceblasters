@@ -13,6 +13,7 @@ public class Projectile extends SpriteBase {
 
 	public void CalculateMove(){
 		if (friendly){
+
 			move(0, -1.2);
 		}
 		else
