@@ -173,7 +173,7 @@ public class Game extends Canvas {
 
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 	    g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-            g.drawImage(background, 0 ,0 ,null);
+            g.drawImage(background, 0, 0, null);
             playerScore = rm.getMainPlayer().getScore();
             g.setColor(Color.GREEN);
             g.drawString("Score: " + Long.toString(playerScore)+ "  Health:" + rm.getMainPlayer().getHp(), 30, 575);
@@ -188,15 +188,15 @@ public class Game extends Canvas {
             // update the movement appropriately
 
 
-            if ((leftPressed) && (!rightPressed)) {
+            if (((leftPressed) && (!rightPressed))&& rm.getMainPlayer().getXPos() > 0) {
                 rm.getMainPlayer().move(-1, 0);
-            } else if ((rightPressed) && (!leftPressed)) {
+            } else if ((rightPressed) && (!leftPressed)&& rm.getMainPlayer().getXPos() < 768) {
                 rm.getMainPlayer().move(1, 0);
             }
 
-            if ((upPressed) && (!downPressed)) {
+            if ((upPressed) && (!downPressed)&& rm.getMainPlayer().getYPos() > 0) {
                 rm.getMainPlayer().move(0, -1);
-            } else if ((downPressed) && (!upPressed)) {
+            } else if ((downPressed) && (!upPressed)&& rm.getMainPlayer().getYPos() < 568) {
                 rm.getMainPlayer().move(0, 1);
             }
 

@@ -51,6 +51,17 @@ public class ResourceManager {
         }
     }
 
+    public void CleanBullets (){
+        ArrayList<Projectile> toDeleteShot = new ArrayList<Projectile>(); //COLLISION DETECTION FOR FRIENDLY PROJECTILES TO ENEMIES
+        for (int i = 0;i< this.getProjectileArr().size(); i++){
+            if (this.getProjectileArr().get(i).getYPos() < 0 || this.getProjectileArr().get(i).getYPos() > 800) {
+                toDeleteShot.add(this.getProjectileArr().get(i));
+                }
+            }
+        for (int i = 0; i<toDeleteShot.size(); i++) {
+            this.getEnemyArr().remove(toDeleteShot.get(i));
+        }
+    }
     public void GenerateEnemies() {
         for (int i = 0; i <= 5; i++) {
             Enemy enemy = new Enemy(100 * i - 600, 50 * i);

@@ -49,10 +49,4 @@ public class Projectile extends SpriteBase {
 		this.setImage(ss.grabImage(2, 1, 32, 33));
 	}
 
-	public Projectile(String type) {
-		super();
-		GetSprite("bullet");
-		this.type = type;
-	}
-
 }
