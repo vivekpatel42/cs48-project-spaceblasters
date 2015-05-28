@@ -1,13 +1,15 @@
 package cs48.project.game.Space_Blasters;
 
+import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.JFrame;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
-
+import java.awt.image.BufferedImage;
 
 
 /**
@@ -18,7 +20,21 @@ public class Game extends Canvas {
 
     private ResourceManager rm;
 
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 800;
+    private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+    private BufferedImage background = null;
 
+    public void init(){
+        BufferedImageLoader loader = new BufferedImageLoader();
+        try{
+	    //   spriteSheet = loader.loadImage("Sprite.png");
+            background = loader.loadImage("background.png");
+	}
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Construct our game and set it running.
      */
@@ -34,13 +50,13 @@ public class Game extends Canvas {
         // get hold the content of the frame and set up the resolution of the game
 
         JPanel panel = (JPanel) container.getContentPane();
-        panel.setPreferredSize(new Dimension(800, 600));
+        panel.setPreferredSize(new Dimension(HEIGHT, WIDTH));
         panel.setLayout(null);
 
 
         // setup our canvas size and put it into the content of the frame
 
-        setBounds(0, 0, 800, 600);
+        setBounds(0, 0, HEIGHT, WIDTH);
         panel.add(this);
 
         // Tell AWT not to bother repainting our canvas since we're
@@ -81,7 +97,8 @@ public class Game extends Canvas {
 
         createBufferStrategy(2);
         strategy = getBufferStrategy();
-
+	
+       
     }
 
 
@@ -138,6 +155,7 @@ public class Game extends Canvas {
     private long playerScore;
 
     public void gameLoop() {
+	init();
         long lastLoopTime = System.currentTimeMillis();
 
         // keep looping round til the game ends
@@ -154,8 +172,8 @@ public class Game extends Canvas {
             // surface and blank it out
 
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
-            g.setColor(Color.black);
-            g.fillRect(0, 0, 800, 600);
+	    g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            g.drawImage(background, 0 ,0 ,null);
             playerScore = rm.getMainPlayer().getScore();
             g.setColor(Color.GREEN);
             g.drawString("Score: " + Long.toString(playerScore)+ "  Health:" + rm.getMainPlayer().getHp(), 30, 575);
