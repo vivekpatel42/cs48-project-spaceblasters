@@ -83,19 +83,6 @@ public abstract class SpriteBase {
         yPos += Ydelta * speed;
     }
 
-    /**
-     * returns true if the image is set and false in IOException
-     * @param SpriteName The name of the file to attempt and load
-     */
-    public boolean GetSprite(String SpriteName) {
-        try {
-            image = ImageIO.read(new File("res/"+ SpriteName + ".jpg"));
-        } catch (IOException e) {
-                System.out.print("unable to find sprite");
-                return false;
-        }
-        return true;
-    }
 
     /**
      *

@@ -1,7 +1,7 @@
-package edu.ucsb.cs56.projects.games.simple_rpg;
+package cs48.project.game.Space_Blasters;
+
 
 import java.awt.FlowLayout;
-import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -49,10 +49,11 @@ public class ShopDisplay extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Weapon temp = (Weapon)weaponSelect.getSelectedItem();
 				weaponShop.buyItem(temp);
-				weaponSelect.removeAllItems();
+				/*weaponSelect.removeAllItems();//COMMENTED OUT TO COMPILE CORRECTLY
+
 				for (Weapon w:weaponSelect) {
 					weaponSelect.addItem(w);
-				}
+				}*/
 			}
 		});
 		//Adds the JComboBox and the JButton to the JFrame with respect

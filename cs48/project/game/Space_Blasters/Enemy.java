@@ -15,19 +15,11 @@ public class Enemy extends SpriteBase {
 	private BufferedImage spriteSheet = null;
 
 
-	public Enemy() {
-		super();
-		lvl = 1;
-		hp = lvl*100;
-		movement = 2;
-		GetSprite("AngryFace");
-	}
 	public Enemy(double xDelta, double yDelta){
 		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
 		movement = 2;
-		//GetSprite("AngryFace");
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			spriteSheet = loader.loadImage("sprite_sheet.png");

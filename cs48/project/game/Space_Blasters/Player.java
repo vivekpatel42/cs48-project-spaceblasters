@@ -14,7 +14,6 @@ public class Player extends SpriteBase {
 
     public Player(double xPos, double yPos) {
         super(xPos, yPos);
-        //GetSprite("Player");
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("sprite_sheet.png");
@@ -33,13 +32,7 @@ public class Player extends SpriteBase {
             return true;
         return false;
     }
-    public Player() {
-        super();
-        GetSprite("Player");
-        this.setType("Player");
-        exp = 0;
-        hp = 100;
-    }
+
     public Projectile TryToFire (){
         // check that we have waiting long enough to fire
 

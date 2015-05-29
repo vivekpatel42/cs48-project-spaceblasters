@@ -92,6 +92,7 @@ public class Menu implements ActionListener {
          * by calling the function, method or constructor, responsible
          * for creating and displaying your GUI.
          */
+        new Thread(new MenuMusic()).start();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

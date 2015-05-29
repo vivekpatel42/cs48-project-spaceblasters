@@ -13,6 +13,7 @@ public class Projectile extends SpriteBase {
 
 	public void CalculateMove(){
 		if (friendly){
+
 			move(0, -1.2);
 		}
 		else
@@ -46,12 +47,6 @@ public class Projectile extends SpriteBase {
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		this.setImage(ss.grabImage(2, 1, 32, 33));
-	}
-
-	public Projectile(String type) {
-		super();
-		GetSprite("bullet");
-		this.type = type;
 	}
 
 }

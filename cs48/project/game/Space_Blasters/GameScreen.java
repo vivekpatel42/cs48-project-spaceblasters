@@ -27,26 +27,50 @@ public class GameScreen extends Canvas implements Runnable{
     private Thread thread;
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage spriteSheet = null;
-    
-    private BufferedImage player;
-    private BufferedImage enemy;
-    private BufferedImage bullet1;
-    private BufferedImage bullet2;
+    private BufferedImage background = null;
 
+    private BufferedImage player;
+    private BufferedImage pbullet;
+    private BufferedImage player2;
+    private BufferedImage p2bullet;
+    
+    private BufferedImage enemy;
+    private BufferedImage ebullet;
+    private BufferedImage enemy2;
+    private BufferedImage e2bullet;
+    private BufferedImage enemy3;
+    private BufferedImage e3bullet;
+
+    private BufferedImage comet;
+    
+    private BufferedImage explosion; 
     public void init(){
 	BufferedImageLoader loader = new BufferedImageLoader();
 	try{
-	    spriteSheet = loader.loadImage("GABE.png");
+	    spriteSheet = loader.loadImage("Sprite.png");
+	    background = loader.loadImage("background.png");
 	    }
 	catch(IOException e){
 	    e.printStackTrace();
 	}
 	
       	SpriteSheet ss = new SpriteSheet(spriteSheet);
-       	player = ss.grabImage(1,1,32,33);
-	enemy = ss.grabImage(3,1,32,32);
-	bullet1 = ss.grabImage(2,1,32,32);
-	bullet2 = ss.grabImage(4,1,32,32);
+       	player = ss.grabImage(1,1,32,32);
+	pbullet = ss.grabImage(2, 1, 9, 19);
+	player2 = ss.grabImage(1, 2, 32, 23);
+	p2bullet = ss.grabImage(2, 2, 11, 14);
+
+	enemy = ss.grabImage(3, 1, 24, 25);
+	ebullet = ss.grabImage(4, 1, 7, 17);
+	enemy2 = ss.grabImage(5, 1, 26, 28);
+	e2bullet = ss.grabImage(6, 1, 13, 13);
+	enemy3 = ss.grabImage(3, 2, 32, 24);
+	e3bullet = ss.grabImage(4, 2, 9, 10);
+
+	comet = ss.grabImage(7, 1, 22, 32);
+
+	explosion = ss.grabImage(8, 1, 32, 32);
+       
     }
     private synchronized void start(){
 	if(running)
@@ -116,12 +140,22 @@ public class GameScreen extends Canvas implements Runnable{
 	
 	Graphics g = bs.getDrawGraphics();
 	g.drawImage(image, 0 , 0 , getWidth() , getHeight() , this);
+	g.drawImage(background, 0, 0, null);
 	
       	g.drawImage(player, 200, 400, this);
-	g.drawImage(enemy, 100, 100, this);
-	g.drawImage(bullet1, 200, 300, this);
-	g.drawImage(bullet2, 100, 200, this);
+	g.drawImage(pbullet, 210, 375, this);
+	g.drawImage(player2, 250, 400, this);
+	g. drawImage(p2bullet, 260, 375, this);
+	g.drawImage(explosion, 300, 400, this);
 
+	g.drawImage(enemy, 100, 100, this);
+	g.drawImage(ebullet, 110, 125, this);
+	g.drawImage(enemy2, 150, 100, this);
+	g.drawImage(e2bullet, 158, 145, this);
+	g.drawImage(enemy3, 200, 100, this);
+	g.drawImage(e3bullet, 212, 125, this);
+	g.drawImage(comet, 250, 100, this);
+	
 	g.dispose();
 	bs.show();
     }
