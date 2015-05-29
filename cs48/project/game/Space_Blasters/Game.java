@@ -24,17 +24,18 @@ public class Game extends Canvas {
     public static final int HEIGHT = 800;
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage background = null;
+    private JPanel gameOver;
 
-    public void init(){
+    public void init() {
         BufferedImageLoader loader = new BufferedImageLoader();
-        try{
-	    //   spriteSheet = loader.loadImage("Sprite.png");
+        try {
+            //   spriteSheet = loader.loadImage("Sprite.png");
             background = loader.loadImage("background.png");
-	}
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Construct our game and set it running.
      */
@@ -97,8 +98,8 @@ public class Game extends Canvas {
 
         createBufferStrategy(2);
         strategy = getBufferStrategy();
-	
-       
+
+
     }
 
 
@@ -155,7 +156,7 @@ public class Game extends Canvas {
     private long playerScore;
 
     public void gameLoop() {
-	init();
+        init();
         long lastLoopTime = System.currentTimeMillis();
 
         // keep looping round til the game ends
@@ -172,11 +173,11 @@ public class Game extends Canvas {
             // surface and blank it out
 
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
-	    g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             g.drawImage(background, 0, 0, null);
             playerScore = rm.getMainPlayer().getScore();
             g.setColor(Color.GREEN);
-            g.drawString("Score: " + Long.toString(playerScore)+ "  Health:" + rm.getMainPlayer().getHp(), 30, 575);
+            g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
             if (rm.getEnemyArr().size() == 0)
                 rm.GenerateEnemies();
@@ -188,15 +189,15 @@ public class Game extends Canvas {
             // update the movement appropriately
 
 
-            if (((leftPressed) && (!rightPressed))&& rm.getMainPlayer().getXPos() > 0) {
+            if (((leftPressed) && (!rightPressed)) && rm.getMainPlayer().getXPos() > 0) {
                 rm.getMainPlayer().move(-1, 0);
-            } else if ((rightPressed) && (!leftPressed)&& rm.getMainPlayer().getXPos() < 768) {
+            } else if ((rightPressed) && (!leftPressed) && rm.getMainPlayer().getXPos() < 768) {
                 rm.getMainPlayer().move(1, 0);
             }
 
-            if ((upPressed) && (!downPressed)&& rm.getMainPlayer().getYPos() > 0) {
+            if ((upPressed) && (!downPressed) && rm.getMainPlayer().getYPos() > 0) {
                 rm.getMainPlayer().move(0, -1);
-            } else if ((downPressed) && (!upPressed)&& rm.getMainPlayer().getYPos() < 568) {
+            } else if ((downPressed) && (!upPressed) && rm.getMainPlayer().getYPos() < 568) {
                 rm.getMainPlayer().move(0, 1);
             }
 
@@ -221,7 +222,7 @@ public class Game extends Canvas {
                 if (!(shot == null))
                     rm.getProjectileArr().add(shot);
             }
-            for (int i = 0; i < rm.getEnemyArr().size(); i++){
+            for (int i = 0; i < rm.getEnemyArr().size(); i++) {
                 Projectile shot = rm.getEnemyArr().get(i).TryToFire();
                 if (!(shot == null))
                     rm.getProjectileArr().add(shot);
@@ -233,17 +234,16 @@ public class Game extends Canvas {
             for (int i = 0; i < rm.getEnemyArr().size(); i++) {
                 g.drawImage(rm.getEnemyArr().get(i).getImage(), null, (int) rm.getEnemyArr().get(i).getXPos(), (int) rm.getEnemyArr().get(i).getYPos());
             }
-            for (int i = 0; i < rm.getProjectileArr().size() ; i++) {
+            for (int i = 0; i < rm.getProjectileArr().size(); i++) {
                 g.drawImage(rm.getProjectileArr().get(i).getImage(), null, (int) rm.getProjectileArr().get(i).getXPos(), (int) rm.getProjectileArr().get(i).getYPos());
             }
             g.drawImage(rm.getMainPlayer().getImage(), null, (int) rm.getMainPlayer().getXPos(), (int) rm.getMainPlayer().getYPos());
 
 
             // DO COLLISION DETECTION by calling the resource manager
-            if (!waitingForKeyPress && !(rm.getProjectileArr() == null)){
+            if (!waitingForKeyPress && !(rm.getProjectileArr() == null)) {
                 rm.Collisions();
             }
-
 
 
             // if we're waiting for an "any key" press then draw the
@@ -267,6 +267,10 @@ public class Game extends Canvas {
             // 100 fps but on windows this might vary each loop due to
 
             // a bad implementation of timer
+
+            if (rm.checkForGameOver()) {
+                gameRunning = false;
+            }
 
             try {
                 Thread.sleep(12);

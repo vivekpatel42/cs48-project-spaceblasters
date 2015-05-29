@@ -71,4 +71,10 @@ public class ResourceManager {
     }
 
 
+    public boolean checkForGameOver() {
+        if(mainPlayer.getHp() <= 0) {
+            return true;
+        }
+        return false;
+    }
 }

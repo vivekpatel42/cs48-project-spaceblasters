@@ -1,15 +1,17 @@
 package cs48.project.game.Space_Blasters;
 
+import javax.print.Doc;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Graphics;
 import java.io.*;
 import java.util.*;
 import com.mongodb.*;
-import com.mongodb.Cursor;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import static java.util.concurrent.TimeUnit.SECONDS;
+import com.mongodb.client.*;
+import org.bson.*;
+
+import static com.mongodb.client.model.Filters.exists;
+import static com.mongodb.client.model.Sorts.descending;
 
 /**
  * Created by Vivek on 5/7/2015.
@@ -20,7 +22,7 @@ public class HighScores extends JPanel {
     private String[][] tableData;
     private JLabel scoreLabel;
     private MongoDatabase db;
-    MongoCollection highScores;
+    private MongoCollection<Document> highScores;
     private JTable scoreTable;
 
     /**
@@ -32,6 +34,10 @@ public class HighScores extends JPanel {
         scoreList = new long[10];
         tableData = new String[10][2];
         fillScoreTable();
+        String[] columnNames = {"Names", "Scores"};
+        scoreTable = new JTable(tableData, columnNames);
+        this.setLayout(new BorderLayout());
+        //this.add(scoreTable.getTableHeader(), BorderLayout.PAGE_START);
         this.add(scoreTable, BorderLayout.CENTER);
     }
 
@@ -48,12 +54,15 @@ public class HighScores extends JPanel {
 
     private void fillScoreTable() {
         highScores = db.getCollection("HighScores");
-
+        MongoCursor<Document> cursor = highScores.find(exists("score")).sort(descending("score")).iterator();
+        for (int i = 0; i < 10; i++) {
+            tableData[i][1] = cursor.next().toString();
+        }
+        cursor = highScores.find(exists("name")).sort(descending("score")).iterator();
+        for (int i = 0; i < 10; i++) {
+            tableData[i][0] = cursor.next().toString();
+        }
     }
 
-    public void addHighScore(String name, long score) {
-
-    }
 }
-
 
