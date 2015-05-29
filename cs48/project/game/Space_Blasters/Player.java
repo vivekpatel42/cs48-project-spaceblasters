@@ -27,7 +27,7 @@ public class Player extends SpriteBase {
         hp = 100;
     }
     public boolean GotShot(){
-        hp -= 50;
+        hp -= 10;
         if (hp <= 0)
             return true;
         return false;
@@ -52,6 +52,10 @@ public class Player extends SpriteBase {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHp() {
+        return 100;
     }
 
     public void increaseScore(long score) {
