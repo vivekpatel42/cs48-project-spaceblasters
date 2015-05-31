@@ -19,7 +19,7 @@ public class Enemy extends SpriteBase {
 		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
-		movement = 2;
+		movement = 1;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			spriteSheet = loader.loadImage("sprite_sheet.png");
@@ -29,6 +29,22 @@ public class Enemy extends SpriteBase {
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		this.setImage(ss.grabImage(3, 1, 32, 32));
 	}
+
+	public Enemy(double xDelta, double yDelta, int move){
+		super(xDelta,yDelta);
+		lvl = 1;
+		hp = lvl*100;
+		movement = move;
+		BufferedImageLoader loader = new BufferedImageLoader();
+		try {
+			spriteSheet = loader.loadImage("Sprite.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		this.setImage(ss.grabImage(5, 1, 32, 32));
+	}
+
 	public Projectile TryToFire (){
 		// check that we have waiting long enough to fire
 		if (System.currentTimeMillis() - lastFire < firingInterval) {
@@ -38,9 +54,9 @@ public class Enemy extends SpriteBase {
 		lastFire = System.currentTimeMillis();
 		return new Projectile(this.getXPos(), this.getYPos(), false);
 	}
-	//Stub
 	public void CalculateMove() {
 		if (this.movement == 1) {
+			Ydirection = 0;
 			move(Xdirection, Ydirection);
 			if (this.getXPos() < 50) {
 				Xdirection = 1;

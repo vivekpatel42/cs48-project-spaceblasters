@@ -67,9 +67,25 @@ public class ResourceManager {
             Enemy enemy = new Enemy(100 * i - 600, 50 * i);
             enemyArr.add(enemy);
         }
-
     }
 
+    /**
+     *
+     * @param version decides which version of enemies to generate
+     */
+    public void GenerateEnemies(int version) {
+        if (version == 0){
+             for (int i = 0; i <= 5; i++) {
+                Enemy enemy = new Enemy(100 * i - 600, 50 * i);
+                enemyArr.add(enemy);
+        }}
+        if (version == 1) {
+            for (int i = 0; i <= 5; i++) {
+                Enemy enemy = new Enemy(100 * i - 600, 50 * i, 2);
+                enemyArr.add(enemy);
+            }
+        }
+    }
 
     public boolean checkForGameOver() {
         if(mainPlayer.getHp() <= 0) {

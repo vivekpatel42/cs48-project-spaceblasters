@@ -62,8 +62,4 @@ public class Player extends SpriteBase {
         this.score += score;
     }
 
-    @Override
-    public boolean friendlyCollision(SpriteBase other) {
-        return true; //STUB
-    }
 }

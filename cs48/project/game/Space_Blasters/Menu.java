@@ -62,6 +62,9 @@ public class Menu implements ActionListener {
                  * and add the new panel to the frame.
                  */
             frame.remove(menu);
+            frame.setVisible(false);
+
+            Game.main(null);
             frame.setContentPane(panel);
         } else if (button == Instructions) {
             frame.remove(menu);
@@ -92,7 +95,8 @@ public class Menu implements ActionListener {
          * by calling the function, method or constructor, responsible
          * for creating and displaying your GUI.
          */
-        new Thread(new MenuMusic()).start();
+       Thread music =  new Thread(new MenuMusic());
+        music.start();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
