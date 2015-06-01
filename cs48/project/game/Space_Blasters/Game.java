@@ -486,6 +486,7 @@ public class Game extends Canvas {
          *
          * @param args The arguments that are passed into our game
          */
+    /*
         public static void main(String ... args) {
             Game g = new Game();
             new Thread(new GameMusic()).start();
@@ -500,4 +501,25 @@ public class Game extends Canvas {
                 g.checkForHighScore();
             }
         }
+*/
+    public static void go() {
+        Game g = new Game();
+        new Thread(new GameMusic()).start();
+        // Start the main game loop, note: this method will not
+
+
+        // return until the game has finished running. Hence we are
+
+        // using the actual main thread to run the game.
+        boolean loop = true;
+        while (loop) {
+            g.gameLoop();
+            g.checkForHighScore();
+            //loop = false;
+        }
+
     }
+    public static void main(String[] args) {
+        Game.go();
+    }
+}
