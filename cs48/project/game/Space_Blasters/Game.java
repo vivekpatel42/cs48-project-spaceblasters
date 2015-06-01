@@ -508,7 +508,7 @@ public class Game extends Canvas {
             boolean loop = true;
             while (loop) {
                 g.gameLoop();
-                g.checkForHighScore();
             }
+		g.checkForHighScore();
         }
     }
