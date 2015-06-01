@@ -305,6 +305,10 @@ public class Game extends Canvas {
                     e.printStackTrace();
                 }
                 g.drawImage(background, 0, 0, null);
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                }
             }
 
             // finally, we've completed drawing so clear up the graphics

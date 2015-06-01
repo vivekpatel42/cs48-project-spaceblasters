@@ -42,7 +42,12 @@ public class Enemy extends SpriteBase {
 			e.printStackTrace();
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		if (move == 2)
 		this.setImage(ss.grabImage(5, 1, 32, 32));
+		else {
+			this.setImage(ss.grabImage(3, 1, 24, 25));
+
+		}
 	}
 
 	public Projectile TryToFire (){
