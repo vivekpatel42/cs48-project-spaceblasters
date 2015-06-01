@@ -23,6 +23,7 @@ public class Game extends Canvas {
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage background = null;
     private JPanel gameOver;
+    private JFrame container;
 
     public void init() {
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -44,7 +45,7 @@ public class Game extends Canvas {
 
         // create a frame to contain our game
 
-        JFrame container = new JFrame("Space Blasters");
+        container = new JFrame("Space Blasters");
 
         // get hold the content of the frame and set up the resolution of the game
 
@@ -450,6 +451,7 @@ public class Game extends Canvas {
     private void writeNewHighScore(final HighScores hs, int i) {
         final JFrame frame = new JFrame("New High Score!");
         JPanel highScoreEntry = new JPanel();
+        highScoreEntry.setPreferredSize(new Dimension(640, 480));
         highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
         JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
         JLabel pressEnter = new JLabel("Press enter to submit your score.");
@@ -467,7 +469,6 @@ public class Game extends Canvas {
             }
         });
         frame.setVisible(true);
-        frame.setFocusable(true);
     }
 
 
@@ -489,5 +490,6 @@ public class Game extends Canvas {
 
             g.gameLoop();
             g.checkForHighScore();
+            g.container.setVisible(false);
         }
     }

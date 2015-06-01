@@ -11,7 +11,7 @@ import javax.imageio.*;
  */
 public class Instructions extends JPanel {
 
-    private BufferedImage wasd;
+    private BufferedImage arrowKeys;
     private BufferedImage spacebar;
     private JLabel instructions;
 
@@ -26,8 +26,8 @@ public class Instructions extends JPanel {
         instructions = new JLabel("Use spacebar to shoot");
         add(instructions);
         try {
-            wasd = ImageIO.read(new File("res/wasd.png"));
-            spacebar = ImageIO.read(new File("res/spacebar.png"));
+            arrowKeys = ImageIO.read(new File("arrowKeys.png"));
+            spacebar = ImageIO.read(new File("/spacebar.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class Instructions extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(wasd, 250, 100, null);
+        g.drawImage(arrowKeys, 250, 100, null);
         g.drawImage(spacebar, 250, 320, null);
     }
 }
