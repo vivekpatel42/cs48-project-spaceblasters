@@ -19,7 +19,7 @@ public class Enemy extends SpriteBase {
 		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
-		movement = 1;
+		movement = 3;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			spriteSheet = loader.loadImage("sprite_sheet.png");
@@ -82,6 +82,10 @@ public class Enemy extends SpriteBase {
 			} else if (this.getXPos() > 750) {
 				Xdirection = -1;
 				Ydirection =1;
+                if (this.getYPos() > 750)
+                    Ydirection = -1;
+                else if (this.getYPos() < 50)
+                    Ydirection = 1;
 			}
         }
 	}
