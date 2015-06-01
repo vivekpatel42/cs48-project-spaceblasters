@@ -21,7 +21,7 @@ public class PlayerLaserAudio implements Runnable {
         // from a wave File
         Clip clip;
         AudioInputStream audioIn;
-        File soundFile = new File("res/PlayerLaser.wav");
+        File soundFile = new File("res/Pew.wav");
         try {
             audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();

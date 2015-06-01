@@ -174,7 +174,7 @@ public class Game extends Canvas {
             g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
             if (rm.getEnemyArr().size() == 0) {
-                rm.GenerateEnemies(rand.nextInt(2));
+                rm.GenerateEnemies(rand.nextInt(3));
                 wave++;
             }
             //Generate random meteors
@@ -218,8 +218,10 @@ public class Game extends Canvas {
                     for (int i = 0; i < toDeleteShot.size(); i++) {
                         rm.getProjectileArr().remove(toDeleteShot.get(i));
                     }
-                    if (isDead)
+                    if (isDead) {
                         NotFound = null;
+                        rm.getMainPlayer().increaseScore(25000);
+                    }
             }
 
             // resolve the movement of the ship. First assume the ship
