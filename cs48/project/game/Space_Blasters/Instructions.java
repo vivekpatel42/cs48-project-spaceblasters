@@ -11,7 +11,7 @@ import javax.imageio.*;
  */
 public class Instructions extends JPanel {
 
-    private BufferedImage wasd;
+    private BufferedImage arrowKeys;
     private BufferedImage spacebar;
     private JLabel instructions;
 
@@ -21,22 +21,24 @@ public class Instructions extends JPanel {
     public Instructions() {
         super();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        instructions = new JLabel("Use \"WASD\" or arrow keys for moving player ship");
+        instructions = new JLabel("Use arrow keys for moving player ship");
         add(instructions);
         instructions = new JLabel("Use spacebar to shoot");
         add(instructions);
+        BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            wasd = ImageIO.read(new File("res/wasd.png"));
-            spacebar = ImageIO.read(new File("res/spacebar.png"));
-        } catch (IOException ex) {
+            arrowKeys = loader.loadImage("arrowKeys.png");
+            spacebar = loader.loadImage("spacebar.png");
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
+
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(wasd, 250, 100, null);
-        g.drawImage(spacebar, 250, 320, null);
+        g.drawImage(arrowKeys, 110, 70, null);
+        g.drawImage(spacebar, 195, 350, null);
     }
 }
