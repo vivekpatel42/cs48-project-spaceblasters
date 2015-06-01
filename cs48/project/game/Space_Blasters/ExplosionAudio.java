@@ -8,16 +8,17 @@ import java.io.IOException;
 /**
  * Created by Richard Alvarez on 5/13/2015.
  */
-public class GameMusic implements Runnable {
+public class ExplosionAudio implements Runnable {
 
-    public static void main(String args[]){
-        new Thread(new GameMusic()).start();
+    public static void main(String args[]) {
+        new Thread(new ExplosionAudio()).start();
 
 
     }
+
     @Override
-	public void run() {
-	// from a wave File
+    public void run() {
+        // from a wave File
         Clip clip;
         AudioInputStream audioIn;
         File soundFile = new File("res/Explosion.wav");
@@ -35,3 +36,4 @@ public class GameMusic implements Runnable {
 
 
     }
+}
