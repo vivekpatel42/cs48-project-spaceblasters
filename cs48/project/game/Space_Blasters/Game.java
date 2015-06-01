@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -110,18 +111,6 @@ public class Game extends Canvas {
      * True if the game is currently "running", i.e. the game loop is looping
      */
     private boolean gameRunning = true;
-    /**
-     * The time at which last fired a shot
-     */
-    private long lastFire = 0;
-    /**
-     * The interval between our players shot (ms)
-     */
-    private long firingInterval = 500;
-    /**
-     * The number of aliens left on the screen
-     */
-    private int alienCount;
 
     /**
      * The message to display which waiting for a key press
@@ -159,7 +148,10 @@ public class Game extends Canvas {
         long lastLoopTime = System.currentTimeMillis();
         Boss NotFound = null;
         int wave= 0;
-
+        Random rand = new Random();
+        gameRunning = true;
+        rm = new ResourceManager();
+        waitingForKeyPress = true;
         // keep looping round til the game ends
         while (gameRunning) {
             // work out how long its been since the last update, this
@@ -181,13 +173,25 @@ public class Game extends Canvas {
             g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
             if (rm.getEnemyArr().size() == 0) {
-                rm.GenerateEnemies(1);
+                rm.GenerateEnemies(rand.nextInt(2));
                 wave++;
             }
+            //Generate random meteors
+            int meteor = rand.nextInt(1000);
+            if (!waitingForKeyPress && meteor <=4 && wave > 5){
+                Projectile Meteor = new Projectile(rand.nextInt(700), 0, rand.nextInt(2)+7);
+                Meteor.setDirection(rand.nextDouble()-.5);
+                rm.getProjectileArr().add(Meteor);
+
+            }
+
 
             if (!waitingForKeyPress){//asks resource manager to remove bullets out of frame
                 rm.CleanBullets();
             }
+
+
+
 
             //LOOPS FOR THE BOSS TO SPAWN AND ACT
             if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound!= null)){
@@ -490,8 +494,10 @@ public class Game extends Canvas {
             // return until the game has finished running. Hence we are
 
             // using the actual main thread to run the game.
-
-            g.gameLoop();
-            g.checkForHighScore();
+            boolean loop = true;
+            while (loop) {
+                g.gameLoop();
+                g.checkForHighScore();
+            }
         }
     }

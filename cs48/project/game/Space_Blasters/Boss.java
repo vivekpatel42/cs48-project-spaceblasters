@@ -31,8 +31,7 @@ public class Boss extends SpriteBase{
     public boolean gotShot(){
         this.hp -= 5000;
         if (this.hp <= 0){
-	    new Thread(new ExplosionAudio()).start();
-
+            new Thread(new ExplosionAudio()).start();
             return true;
 	}
 
@@ -46,7 +45,7 @@ public class Boss extends SpriteBase{
             return;
         }
         // if we waited long enough, create the shot entity, and record the time.
-	new Thread(new BossLaserAudio()).start();
+	//new Thread(new BossLaserAudio()).start();
 
 	lastFire = System.currentTimeMillis();
         for (int i= 0; i <= 2;i++ ){

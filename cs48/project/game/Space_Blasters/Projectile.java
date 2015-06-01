@@ -6,6 +6,12 @@ import java.io.IOException;
 public class Projectile extends SpriteBase {
 	boolean friendly = true;
 	private BufferedImage spriteSheet = null;
+	private double direction= 0;
+
+
+	public void setDirection(double direction) {
+		this.direction = direction;
+	}
 
 	public boolean isFriendly() {
 		return friendly;
@@ -18,6 +24,7 @@ public class Projectile extends SpriteBase {
 		}
 		else
 			move (0, 1.1);
+		move(direction, 0);
 	}
 
 	public Projectile(double xPos, double yPos, int bullet) {
@@ -25,7 +32,7 @@ public class Projectile extends SpriteBase {
 		friendly = false;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			spriteSheet = loader.loadImage("sprite_sheet.png");
+			spriteSheet = loader.loadImage("Sprite.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +45,7 @@ public class Projectile extends SpriteBase {
 		super(xPos, yPos);
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			spriteSheet = loader.loadImage("sprite_sheet.png");
+			spriteSheet = loader.loadImage("Sprite.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Projectile not Found");
@@ -52,7 +59,7 @@ public class Projectile extends SpriteBase {
 		friendly = friend;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			spriteSheet = loader.loadImage("sprite_sheet.png");
+			spriteSheet = loader.loadImage("Sprite.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Projectile not Found");

@@ -26,6 +26,7 @@ public class BossLaserAudio implements Runnable {
             audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioIn);
+            clip.loop(0);
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
