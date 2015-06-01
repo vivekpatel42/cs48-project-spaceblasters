@@ -219,6 +219,7 @@ public class Game extends Canvas {
                     }
                     if (isDead) {
                         NotFound = null;
+                        new Thread( new Wilhelm()).start();
                         rm.getMainPlayer().increaseScore(25000);
                     }
             }
@@ -299,6 +300,7 @@ public class Game extends Canvas {
             //Check for Game ending condition
             if (rm.checkForGameOver()) {
                 gameRunning = false;
+                new Thread (new ExplosionAudio()).start();
                 BufferedImageLoader loader = new BufferedImageLoader();
                 try {
                     background = loader.loadImage("GameOver.png");
