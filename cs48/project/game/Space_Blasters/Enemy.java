@@ -75,7 +75,14 @@ public class Enemy extends SpriteBase {
                 Ydirection = -1;
         }
         else if (this.movement == 3) {
-
+			move(Xdirection, Ydirection);
+			if (this.getXPos() < 50) {
+				Xdirection = 1;
+				Ydirection = 0;
+			} else if (this.getXPos() > 750) {
+				Xdirection = -1;
+				Ydirection =1;
+			}
         }
 	}
 }
