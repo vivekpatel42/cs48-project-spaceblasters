@@ -145,6 +145,7 @@ public class Game extends Canvas {
 
     public void gameLoop() {
         init();
+        startGame();
         long lastLoopTime = System.currentTimeMillis();
         Boss NotFound = null;
         int wave= 0;
@@ -173,7 +174,7 @@ public class Game extends Canvas {
             g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
             if (rm.getEnemyArr().size() == 0) {
-                rm.GenerateEnemies(rand.nextInt(2));
+                rm.GenerateEnemies(rand.nextInt(3));
                 wave++;
             }
             //Generate random meteors
@@ -198,6 +199,9 @@ public class Game extends Canvas {
                 if (NotFound == null) {
                     NotFound = new Boss();
                 }
+                if (wave ==7){
+                    NotFound.firingInterval = 350;
+                }
                     NotFound.CalculateMove();
                     NotFound.TryToFire(rm);
                     g.drawImage(NotFound.getImage(), null, (int) NotFound.getXPos(), (int) NotFound.getYPos());
@@ -214,8 +218,10 @@ public class Game extends Canvas {
                     for (int i = 0; i < toDeleteShot.size(); i++) {
                         rm.getProjectileArr().remove(toDeleteShot.get(i));
                     }
-                    if (isDead)
+                    if (isDead) {
                         NotFound = null;
+                        rm.getMainPlayer().increaseScore(25000);
+                    }
             }
 
             // resolve the movement of the ship. First assume the ship
@@ -301,6 +307,10 @@ public class Game extends Canvas {
                     e.printStackTrace();
                 }
                 g.drawImage(background, 0, 0, null);
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                }
             }
 
             // finally, we've completed drawing so clear up the graphics
@@ -461,7 +471,7 @@ public class Game extends Canvas {
         highScoreEntry.setPreferredSize(new Dimension(640, 480));
         highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
         JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
-        JLabel pressEnter = new JLabel("Press enter to submit your score.");
+        JLabel pressEnter = new JLabel("Enter your name and press enter to submit your score.");
         final JTextField enterName = new JTextField(15);
         highScoreEntry.add(newHighScore);
         highScoreEntry.add(pressEnter);

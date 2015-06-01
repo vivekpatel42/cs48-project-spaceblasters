@@ -68,41 +68,17 @@ public class Menu extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
-        if (button == Instructions) {
-            frame.remove(this);
-            panel = new Instructions();
-            panel.add(ReturnMenu);
-            frame.setContentPane(panel);
+        if (button == StartGame) {
                 /*
                  * this will remove the first panel
                  * and add the new panel to the frame.
                  */
-            //frame.remove(this);
-            //frame.setVisible(false);
-           // String[] args = {};
-            //Game.main(args);
-            //Game.main(null);
-            //frame.setContentPane(panel);
-            //return;
-        } else if (button == StartGame) {
+            return;
+        } else if (button == Instructions) {
             frame.remove(this);
-            //String[] args = {};
-            //Game.go();
-            //panel = new Instructions();
-            //panel.add(ReturnMenu);
+            panel = new Instructions();
             panel.add(ReturnMenu);
             frame.setContentPane(panel);
-            //Game.main();
-            //Game g = new Game();
-           // new Thread(new GameMusic()).start();
-            // Start the main game loop, note: this method will not
-
-            // return until the game has finished running. Hence we are
-
-            // using the actual main thread to run the game.
-
-            //g.gameLoop();
-            //g.checkForHighScore();
         } else if (button == highScores) {
             frame.remove(this);
             panel = new HighScores();

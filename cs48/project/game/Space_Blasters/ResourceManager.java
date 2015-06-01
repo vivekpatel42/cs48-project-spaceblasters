@@ -85,6 +85,12 @@ public class ResourceManager {
                 enemyArr.add(enemy);
             }
         }
+        if (version == 2) {
+            for (int i = 0; i <= 5; i++) {
+                Enemy enemy = new Enemy(100 * i - 600, 50 * i, 3);
+                enemyArr.add(enemy);
+            }
+        }
     }
 
     public boolean checkForGameOver() {

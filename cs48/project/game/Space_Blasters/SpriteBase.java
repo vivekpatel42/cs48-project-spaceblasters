@@ -44,6 +44,7 @@ public abstract class SpriteBase {
     public double getSpeed() {
         return speed;
     }
+    public void setSpeed(int i){speed = i;}
     public double getYPos() {
         return yPos;
     }

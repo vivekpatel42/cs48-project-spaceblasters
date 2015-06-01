@@ -19,7 +19,7 @@ public class Enemy extends SpriteBase {
 		super(xDelta,yDelta);
 		lvl = 1;
 		hp = lvl*100;
-		movement = 3;
+		movement = 1;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			spriteSheet = loader.loadImage("sprite_sheet.png");
@@ -42,7 +42,12 @@ public class Enemy extends SpriteBase {
 			e.printStackTrace();
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		if (move == 2)
 		this.setImage(ss.grabImage(5, 1, 32, 32));
+		else {
+			this.setImage(ss.grabImage(3, 1, 24, 25));
+
+		}
 	}
 
 	public Projectile TryToFire (){
@@ -81,10 +86,10 @@ public class Enemy extends SpriteBase {
 				Ydirection = 0;
 			} else if (this.getXPos() > 750) {
 				Xdirection = -1;
-				Ydirection =1;
-                if (this.getYPos() > 750)
+				Ydirection =.5;
+                if (this.getYPos() > 700)
                     Ydirection = -1;
-                else if (this.getYPos() < 50)
+                else if (this.getYPos() < 0)
                     Ydirection = 1;
 			}
         }

@@ -41,7 +41,7 @@ public class Player extends SpriteBase {
         }
 
         // if we waited long enough, create the shot entity, and record the time.
-	//new Thread(new PlayerLaserAudio()).start();
+	    new Thread(new PlayerLaserAudio()).start();
 
         lastFire = System.currentTimeMillis();
         return new Projectile(this.getXPos(), this.getYPos());
