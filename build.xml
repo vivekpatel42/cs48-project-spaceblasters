@@ -71,7 +71,25 @@
 		 <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />                         
    		<echo>Javadoc deployed to ${javadocURL}</echo>                                                 
                                                                                                   
- 	</target>  
+ 	</target>
 
+	<target name="test" depends="compile">
+
+		<junit haltonerror="no" haltonfailure="no">
+			<classpath>
+				<pathelement location="lib/junit-4.8.2.jar"/>
+				<pathelement location="build"/>
+			</classpath>
+
+			<batchtest fork="yes">
+				<fileset dir="src">
+					<include name="*Test.java"/>
+				</fileset>
+			</batchtest>
+
+			<formatter type="plain" usefile="false" />
+
+		</junit>
+	</target>
 	
 </project>
