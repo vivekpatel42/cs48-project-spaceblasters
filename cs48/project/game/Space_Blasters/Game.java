@@ -189,7 +189,7 @@ public class Game extends Canvas {
             }
 
             //LOOPS FOR THE BOSS TO SPAWN AND ACT
-            if (!waitingForKeyPress && wave >=3 ){
+            if (!waitingForKeyPress && (wave == 3 || wave == 7)){
                 if (NotFound == null) {
                     NotFound = new Boss();
                 }
@@ -197,17 +197,20 @@ public class Game extends Canvas {
                     NotFound.TryToFire(rm);
                     g.drawImage(NotFound.getImage(), null, (int) NotFound.getXPos(), (int) NotFound.getYPos());
                 //COLLISION FOR BOSS
+                boolean isDead = false;
                     ArrayList<Projectile> toDeleteShot = new ArrayList<Projectile>(); //COLLISION DETECTION FOR FRIENDLY PROJECTILES TO ENEMIES
                     for (int i = 0; i < rm.getProjectileArr().size(); i++) {
                         if (rm.getProjectileArr().get(i).collidesWith(NotFound) && rm.getProjectileArr().get(i).isFriendly()) {
                             toDeleteShot.add(rm.getProjectileArr().get(i));
                             if (NotFound.gotShot())
-                                NotFound = null;
+                                isDead = true;
                         }
                     }
                     for (int i = 0; i < toDeleteShot.size(); i++) {
                         rm.getProjectileArr().remove(toDeleteShot.get(i));
                     }
+                    if (isDead)
+                        NotFound = null;
             }
 
             // resolve the movement of the ship. First assume the ship
