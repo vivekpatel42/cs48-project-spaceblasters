@@ -1,14 +1,17 @@
 package cs48.project.game.Space_Blasters;
 
-import javax.print.Doc;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+import org.json.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Graphics;
-import java.io.*;
 import java.util.*;
-import com.mongodb.*;
-import com.mongodb.client.*;
-import org.bson.*;
 
 import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Sorts.descending;
@@ -20,7 +23,6 @@ public class HighScores extends JPanel {
 
     private long[] scoreList;
     private String[][] tableData;
-    private JLabel scoreLabel;
     private MongoDatabase db;
     private MongoCollection<Document> highScores;
     private JTable scoreTable;
@@ -31,15 +33,18 @@ public class HighScores extends JPanel {
     public HighScores() {
         super();
         connectToDatabase();
+        highScores = db.getCollection("HighScores");
         scoreList = new long[10];
         tableData = new String[10][2];
         fillScoreTable();
         String[] columnNames = {"Names", "Scores"};
         scoreTable = new JTable(tableData, columnNames);
-        this.setLayout(new BorderLayout());
-        //this.add(scoreTable.getTableHeader(), BorderLayout.PAGE_START);
-        this.add(scoreTable, BorderLayout.CENTER);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(scoreTable.getTableHeader());
+        this.add(scoreTable);
     }
+
+
 
     private void connectToDatabase() {
         try {
@@ -53,16 +58,26 @@ public class HighScores extends JPanel {
     }
 
     private void fillScoreTable() {
-        highScores = db.getCollection("HighScores");
         MongoCursor<Document> cursor = highScores.find(exists("score")).sort(descending("score")).iterator();
-        for (int i = 0; i < 10; i++) {
-            tableData[i][1] = cursor.next().toString();
-        }
-        cursor = highScores.find(exists("name")).sort(descending("score")).iterator();
-        for (int i = 0; i < 10; i++) {
-            tableData[i][0] = cursor.next().toString();
+        for(int i = 0; i < 10; i++) {
+            JSONObject json = new JSONObject(cursor.next().toJson());
+            if(json.toString().contains("$numberLong")) {
+                scoreList[i] = json.getJSONObject("score").getLong("$numberLong");
+            } else {
+                scoreList[i] = json.getLong("score");
+            }
+            tableData[i][1] = String.valueOf(scoreList[i]);
+            tableData[i][0] = json.getString("name");
         }
     }
 
+    public void writeHighScore(String name, long score) {
+        Document scoreData = new Document("name", name).append("score", score);
+        highScores.insertOne(scoreData);
+    }
+
+    public long[] getScoreList() {
+        return scoreList;
+    }
 }
 

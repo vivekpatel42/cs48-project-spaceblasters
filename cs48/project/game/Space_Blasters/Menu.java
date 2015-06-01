@@ -17,7 +17,7 @@ public class Menu implements ActionListener {
     private JFrame frame;
     private JPanel menu, panel;
     private JButton ReturnMenu;
-    private JButton StartGame, Instructions, Highscores;
+    private JButton StartGame, Instructions, highScores;
 
     public Menu() {
 
@@ -35,13 +35,13 @@ public class Menu implements ActionListener {
         menu.setBackground(Color.BLACK);
         StartGame = new JButton("Start Game");
         StartGame.addActionListener(this);
-        Highscores = new JButton("High Scores");
-        Highscores.addActionListener(this);
+        highScores = new JButton("High Scores");
+        highScores.addActionListener(this);
         Instructions = new JButton("Instructions");
         Instructions.addActionListener(this);
         //sound = new JButton("Music");
         menu.add(StartGame, BorderLayout.CENTER);
-        menu.add(Highscores, BorderLayout.CENTER);
+        menu.add(highScores, BorderLayout.CENTER);
         menu.add(Instructions, BorderLayout.CENTER);
 
 
@@ -68,7 +68,7 @@ public class Menu implements ActionListener {
             panel = new Instructions();
             panel.add(ReturnMenu);
             frame.setContentPane(panel);
-        } else if (button == Highscores) {
+        } else if (button == highScores) {
             frame.remove(menu);
             panel = new HighScores();
             panel.add(ReturnMenu);
