@@ -177,7 +177,13 @@ public class Game extends Canvas {
             g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
             if (rm.getEnemyArr().size() == 0)
-                rm.GenerateEnemies();
+                rm.GenerateEnemies(1);
+
+            if (!waitingForKeyPress){//asks resource manager to remove bullets out of frame
+                rm.CleanBullets();
+            }
+
+
 
             // resolve the movement of the ship. First assume the ship
 
@@ -274,6 +280,7 @@ public class Game extends Canvas {
             } catch (Exception e) {
             }
         }
+
     }
 
 

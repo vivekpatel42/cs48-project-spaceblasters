@@ -95,16 +95,6 @@ public abstract class SpriteBase {
 
         return me.intersects(him);
     }
-    
-
-    /**
-     * Notification that this entity collided with another.
-     *
-     * @param other The entity with which this entity collided.
-     */
-    public boolean friendlyCollision(SpriteBase other) {
-        return type.equals(other.type);
-    }
 
 }
 
