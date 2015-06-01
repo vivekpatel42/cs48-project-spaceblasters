@@ -1,13 +1,10 @@
 package cs48.project.game.Space_Blasters;
 
+import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -412,23 +409,57 @@ public class Game extends Canvas {
         }
     }
 
-    /**
-     * The entry point into the game. We'll simply create an
-     * instance of class which will start the display and game
-     * loop.
-     *
-     * @param args The arguments that are passed into our game
-     */
-    public static void main(String[] args) {
-        Game g = new Game();
-        new Thread(new GameMusic()).start();
-        // Start the main game loop, note: this method will not
+        private void checkForHighScore() {
+            HighScores hs = new HighScores();
+            long[] scoreList = hs.getScoreList();
+            for (int i = 0; i < 10; i++) {
+                if (rm.getMainPlayer().getScore() > scoreList[i]) {
+                    writeNewHighScore(hs, i);
+                }
+            }
+        }
 
-        // return until the game has finished running. Hence we are
-
-        // using the actual main thread to run the game.
-
-        g.gameLoop();
+    private void writeNewHighScore(final HighScores hs, int i) {
+        final JFrame frame = new JFrame("New High Score!");
+        JPanel highScoreEntry = new JPanel();
+        highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
+        JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
+        JLabel pressEnter = new JLabel("Press enter to submit your score.");
+        final JTextField enterName = new JTextField(15);
+        highScoreEntry.add(newHighScore);
+        highScoreEntry.add(pressEnter);
+        highScoreEntry.add(enterName);
+        frame.add(highScoreEntry);
+        enterName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = enterName.getText();
+                hs.writeHighScore(name, rm.getMainPlayer().getScore());
+                frame.setVisible(false);
+            }
+        });
+        frame.setVisible(true);
+        frame.setFocusable(true);
     }
 
-}
+
+    /**
+         * The entry point into the game. We'll simply create an
+         * instance of class which will start the display and game
+         * loop.
+         *
+         * @param args The arguments that are passed into our game
+         */
+        public static void main(String[] args) {
+            Game g = new Game();
+            new Thread(new GameMusic()).start();
+            // Start the main game loop, note: this method will not
+
+            // return until the game has finished running. Hence we are
+
+            // using the actual main thread to run the game.
+
+            g.gameLoop();
+            g.checkForHighScore();
+        }
+    }
