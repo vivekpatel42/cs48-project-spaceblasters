@@ -336,8 +336,8 @@ public class Game extends Canvas {
      * continue)
      * <p/>
      * This has been implemented as an inner class more through
-     * habbit then anything else. Its perfectly normal to implement
-     * this as seperate class if slight less convienient.
+     * habit then anything else. Its perfectly normal to implement
+     * this as separate class if slight less convenient.
      *
      * @author Kevin Glass
      */
@@ -493,6 +493,5 @@ public class Game extends Canvas {
 
             g.gameLoop();
             g.checkForHighScore();
-            g.container.setVisible(false);
         }
     }
