@@ -190,7 +190,7 @@ public class Game extends Canvas {
             }
 
             //LOOPS FOR THE BOSS TO SPAWN AND ACT
-            if (!waitingForKeyPress && (wave == 3 || wave == 7)){
+            if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound!= null)){
                 if (NotFound == null) {
                     NotFound = new Boss();
                 }
@@ -287,6 +287,18 @@ public class Game extends Canvas {
                 g.drawString("Press space to start", (800 - g.getFontMetrics().stringWidth("Press space to start")) / 2, 300);
             }
 
+            //Check for Game ending condition
+            if (rm.checkForGameOver()) {
+                gameRunning = false;
+                BufferedImageLoader loader = new BufferedImageLoader();
+                try {
+                    background = loader.loadImage("GameOver.png");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                g.drawImage(background, 0, 0, null);
+            }
+
             // finally, we've completed drawing so clear up the graphics
 
             // and flip the buffer over
@@ -295,15 +307,6 @@ public class Game extends Canvas {
             strategy.show();
 
             // finally pause for a bit. Note: this should run us at about
-
-            // 100 fps but on windows this might vary each loop due to
-
-            // a bad implementation of timer
-
-            if (rm.checkForGameOver()) {
-                gameRunning = false;
-            }
-
             try {
                 Thread.sleep(12);
             } catch (Exception e) {
