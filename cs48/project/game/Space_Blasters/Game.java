@@ -449,7 +449,7 @@ public class Game extends Canvas {
         }
     }
 
-        private void checkForHighScore() {
+        protected void checkForHighScore() {
             HighScores hs = new HighScores();
             long[] scoreList = hs.getScoreList();
             for (int i = 0; i < 10; i++) {
@@ -490,7 +490,7 @@ public class Game extends Canvas {
          *
          * @param args The arguments that are passed into our game
          */
-        public static void main(String[] args) {
+        public static void main(String ... args) {
             Game g = new Game();
             new Thread(new GameMusic()).start();
             // Start the main game loop, note: this method will not
