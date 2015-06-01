@@ -487,7 +487,7 @@ public class Game extends Canvas {
         frame.setVisible(true);
     }
 
-
+/*
     /**
          * The entry point into the game. We'll simply create an
          * instance of class which will start the display and game
