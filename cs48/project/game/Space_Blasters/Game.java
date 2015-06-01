@@ -7,6 +7,7 @@ import java.awt.*;
 import javax.swing.JFrame;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 
 /**
@@ -155,6 +156,8 @@ public class Game extends Canvas {
     public void gameLoop() {
         init();
         long lastLoopTime = System.currentTimeMillis();
+        Boss NotFound = null;
+        int wave= 0;
 
         // keep looping round til the game ends
         while (gameRunning) {
@@ -176,14 +179,36 @@ public class Game extends Canvas {
             g.setColor(Color.GREEN);
             g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
-            if (rm.getEnemyArr().size() == 0)
+            if (rm.getEnemyArr().size() == 0) {
                 rm.GenerateEnemies(1);
+                wave++;
+            }
 
             if (!waitingForKeyPress){//asks resource manager to remove bullets out of frame
                 rm.CleanBullets();
             }
 
-
+            //LOOPS FOR THE BOSS TO SPAWN AND ACT
+            if (!waitingForKeyPress && wave >=3 ){
+                if (NotFound == null) {
+                    NotFound = new Boss();
+                }
+                    NotFound.CalculateMove();
+                    NotFound.TryToFire(rm);
+                    g.drawImage(NotFound.getImage(), null, (int) NotFound.getXPos(), (int) NotFound.getYPos());
+                //COLLISION FOR BOSS
+                    ArrayList<Projectile> toDeleteShot = new ArrayList<Projectile>(); //COLLISION DETECTION FOR FRIENDLY PROJECTILES TO ENEMIES
+                    for (int i = 0; i < rm.getProjectileArr().size(); i++) {
+                        if (rm.getProjectileArr().get(i).collidesWith(NotFound) && rm.getProjectileArr().get(i).isFriendly()) {
+                            toDeleteShot.add(rm.getProjectileArr().get(i));
+                            if (NotFound.gotShot())
+                                NotFound = null;
+                        }
+                    }
+                    for (int i = 0; i < toDeleteShot.size(); i++) {
+                        rm.getProjectileArr().remove(toDeleteShot.get(i));
+                    }
+            }
 
             // resolve the movement of the ship. First assume the ship
 

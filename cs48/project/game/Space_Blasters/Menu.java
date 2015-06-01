@@ -61,11 +61,7 @@ public class Menu implements ActionListener {
                  * this will remove the first panel
                  * and add the new panel to the frame.
                  */
-            frame.remove(menu);
-            frame.setVisible(false);
-
-            Game.main(null);
-            frame.setContentPane(panel);
+            return;
         } else if (button == Instructions) {
             frame.remove(menu);
             panel = new Instructions();
@@ -90,7 +86,7 @@ public class Menu implements ActionListener {
 
     public static void main(String[] args) {
         /*
-         * This is the most important part ofyour GUI app, never forget
+         * This is the most important part of your GUI app, never forget
          * to schedule a job for your event dispatcher thread :
          * by calling the function, method or constructor, responsible
          * for creating and displaying your GUI.
