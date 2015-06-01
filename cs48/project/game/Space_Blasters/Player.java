@@ -54,9 +54,6 @@ public class Player extends SpriteBase {
         return hp;
     }
 
-    public int getMaxHp() {
-        return 100;
-    }
 
     public void increaseScore(long score) {
         this.score += score;

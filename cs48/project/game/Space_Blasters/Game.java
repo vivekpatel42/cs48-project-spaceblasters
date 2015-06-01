@@ -7,6 +7,7 @@ import java.awt.*;
 import javax.swing.JFrame;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 
 /**
@@ -22,6 +23,7 @@ public class Game extends Canvas {
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage background = null;
     private JPanel gameOver;
+    private JFrame container;
 
     public void init() {
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -43,7 +45,7 @@ public class Game extends Canvas {
 
         // create a frame to contain our game
 
-        JFrame container = new JFrame("Space Blasters");
+        container = new JFrame("Space Blasters");
 
         // get hold the content of the frame and set up the resolution of the game
 
@@ -155,6 +157,8 @@ public class Game extends Canvas {
     public void gameLoop() {
         init();
         long lastLoopTime = System.currentTimeMillis();
+        Boss NotFound = null;
+        int wave= 0;
 
         // keep looping round til the game ends
         while (gameRunning) {
@@ -176,14 +180,39 @@ public class Game extends Canvas {
             g.setColor(Color.GREEN);
             g.drawString("Score: " + Long.toString(playerScore) + "  Health: " + rm.getMainPlayer().getHp(), 30, 575);
 
-            if (rm.getEnemyArr().size() == 0)
+            if (rm.getEnemyArr().size() == 0) {
                 rm.GenerateEnemies(1);
+                wave++;
+            }
 
             if (!waitingForKeyPress){//asks resource manager to remove bullets out of frame
                 rm.CleanBullets();
             }
 
-
+            //LOOPS FOR THE BOSS TO SPAWN AND ACT
+            if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound!= null)){
+                if (NotFound == null) {
+                    NotFound = new Boss();
+                }
+                    NotFound.CalculateMove();
+                    NotFound.TryToFire(rm);
+                    g.drawImage(NotFound.getImage(), null, (int) NotFound.getXPos(), (int) NotFound.getYPos());
+                //COLLISION FOR BOSS
+                boolean isDead = false;
+                    ArrayList<Projectile> toDeleteShot = new ArrayList<Projectile>(); //COLLISION DETECTION FOR FRIENDLY PROJECTILES TO ENEMIES
+                    for (int i = 0; i < rm.getProjectileArr().size(); i++) {
+                        if (rm.getProjectileArr().get(i).collidesWith(NotFound) && rm.getProjectileArr().get(i).isFriendly()) {
+                            toDeleteShot.add(rm.getProjectileArr().get(i));
+                            if (NotFound.gotShot())
+                                isDead = true;
+                        }
+                    }
+                    for (int i = 0; i < toDeleteShot.size(); i++) {
+                        rm.getProjectileArr().remove(toDeleteShot.get(i));
+                    }
+                    if (isDead)
+                        NotFound = null;
+            }
 
             // resolve the movement of the ship. First assume the ship
 
@@ -258,6 +287,18 @@ public class Game extends Canvas {
                 g.drawString("Press space to start", (800 - g.getFontMetrics().stringWidth("Press space to start")) / 2, 300);
             }
 
+            //Check for Game ending condition
+            if (rm.checkForGameOver()) {
+                gameRunning = false;
+                BufferedImageLoader loader = new BufferedImageLoader();
+                try {
+                    background = loader.loadImage("GameOver.png");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                g.drawImage(background, 0, 0, null);
+            }
+
             // finally, we've completed drawing so clear up the graphics
 
             // and flip the buffer over
@@ -266,15 +307,6 @@ public class Game extends Canvas {
             strategy.show();
 
             // finally pause for a bit. Note: this should run us at about
-
-            // 100 fps but on windows this might vary each loop due to
-
-            // a bad implementation of timer
-
-            if (rm.checkForGameOver()) {
-                gameRunning = false;
-            }
-
             try {
                 Thread.sleep(12);
             } catch (Exception e) {
@@ -422,6 +454,7 @@ public class Game extends Canvas {
     private void writeNewHighScore(final HighScores hs, int i) {
         final JFrame frame = new JFrame("New High Score!");
         JPanel highScoreEntry = new JPanel();
+        highScoreEntry.setPreferredSize(new Dimension(640, 480));
         highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
         JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
         JLabel pressEnter = new JLabel("Press enter to submit your score.");
@@ -439,7 +472,6 @@ public class Game extends Canvas {
             }
         });
         frame.setVisible(true);
-        frame.setFocusable(true);
     }
 
 
@@ -461,5 +493,6 @@ public class Game extends Canvas {
 
             g.gameLoop();
             g.checkForHighScore();
+            g.container.setVisible(false);
         }
     }

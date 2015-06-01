@@ -74,6 +74,13 @@ public class HighScores extends JPanel {
     public void writeHighScore(String name, long score) {
         Document scoreData = new Document("name", name).append("score", score);
         highScores.insertOne(scoreData);
+        MongoCursor<Document> cursor = highScores.find(exists("score")).sort(descending("score")).iterator();
+        for (int i = 0; i < 10; i++) {
+            cursor.next();
+        }
+        while(cursor.hasNext()) {
+            highScores.deleteOne(cursor.next());
+        }
     }
 
     public long[] getScoreList() {

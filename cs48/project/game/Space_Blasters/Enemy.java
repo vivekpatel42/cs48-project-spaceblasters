@@ -52,7 +52,7 @@ public class Enemy extends SpriteBase {
 		}
 		// if we waited long enough, create the shot entity, and record the time.
 		lastFire = System.currentTimeMillis();
-		return new Projectile(this.getXPos(), this.getYPos(), false);
+		return new Projectile(this.getXPos(), this.getYPos(), 4);
 	}
 	public void CalculateMove() {
 		if (this.movement == 1) {

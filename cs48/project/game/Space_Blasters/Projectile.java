@@ -20,19 +20,17 @@ public class Projectile extends SpriteBase {
 			move (0, 1.1);
 	}
 
-	public Projectile(double xPos, double yPos, boolean friend) {
+	public Projectile(double xPos, double yPos, int bullet) {
 		super(xPos, yPos);
+		friendly = false;
 		BufferedImageLoader loader = new BufferedImageLoader();
-		friendly = friend;
 		try {
 			spriteSheet = loader.loadImage("sprite_sheet.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
-		int bulletChoice = 2;
-		if (!(friendly))
-			bulletChoice = 4;
+		int bulletChoice = bullet;
 		this.setImage(ss.grabImage(bulletChoice, 1, 32, 33));
 	}
 
@@ -48,5 +46,20 @@ public class Projectile extends SpriteBase {
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		this.setImage(ss.grabImage(2, 1, 32, 33));
 	}
+
+	public Projectile(double xPos, double yPos, boolean friend) {
+		super(xPos, yPos);
+		friendly = friend;
+		BufferedImageLoader loader = new BufferedImageLoader();
+		try {
+			spriteSheet = loader.loadImage("sprite_sheet.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Projectile not Found");
+		}
+		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		this.setImage(ss.grabImage(2, 1, 32, 33));
+	}
+
 
 }
