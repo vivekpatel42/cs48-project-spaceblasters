@@ -21,7 +21,7 @@ public class Instructions extends JPanel {
     public Instructions() {
         super();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        instructions = new JLabel("Use \"WASD\" for moving player ship");
+        instructions = new JLabel("Use \"WASD\" or arrow keys for moving player ship");
         add(instructions);
         instructions = new JLabel("Use spacebar to shoot");
         add(instructions);
