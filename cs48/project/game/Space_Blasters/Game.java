@@ -145,6 +145,7 @@ public class Game extends Canvas {
 
     public void gameLoop() {
         init();
+        startGame();
         long lastLoopTime = System.currentTimeMillis();
         Boss NotFound = null;
         int wave= 0;
@@ -197,6 +198,9 @@ public class Game extends Canvas {
             if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound!= null)){
                 if (NotFound == null) {
                     NotFound = new Boss();
+                }
+                if (wave ==7){
+                    NotFound.firingInterval = 350;
                 }
                     NotFound.CalculateMove();
                     NotFound.TryToFire(rm);
