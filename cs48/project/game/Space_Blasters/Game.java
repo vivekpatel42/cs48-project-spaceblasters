@@ -465,7 +465,7 @@ public class Game extends Canvas {
         highScoreEntry.setPreferredSize(new Dimension(640, 480));
         highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
         JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
-        JLabel pressEnter = new JLabel("Press enter to submit your score.");
+        JLabel pressEnter = new JLabel("Enter your name and press enter to submit your score.");
         final JTextField enterName = new JTextField(15);
         highScoreEntry.add(newHighScore);
         highScoreEntry.add(pressEnter);
