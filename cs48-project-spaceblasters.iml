@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mongo-java-driver-3.0.1" level="project" />
     <orderEntry type="library" name="json-20141113" level="project" />
+    <orderEntry type="library" name="junit-4.12" level="project" />
   </component>
 </module>
