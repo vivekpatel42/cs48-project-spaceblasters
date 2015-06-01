@@ -192,12 +192,11 @@ public class Game extends Canvas {
             }
 
 
-
-
             //LOOPS FOR THE BOSS TO SPAWN AND ACT
             if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound!= null)){
                 if (NotFound == null) {
                     NotFound = new Boss();
+                    new Thread(new FIRINGMALASER()).start();
                 }
                 if (wave ==7){
                     NotFound.firingInterval = 350;

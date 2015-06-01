@@ -1,17 +1,16 @@
 package cs48.project.game.Space_Blasters;
 
-
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Richard Alvarez on 5/13/2015.
+ * Created by richa_000 on 6/1/2015.
  */
-public class ExplosionAudio implements Runnable {
+public class FIRINGMALASER implements Runnable {
 
     public static void main(String args[]) {
-        new Thread(new ExplosionAudio()).start();
+        new Thread(new FIRINGMALASER()).start();
 
 
     }
@@ -21,7 +20,7 @@ public class ExplosionAudio implements Runnable {
         // from a wave File
         Clip clip;
         AudioInputStream audioIn;
-        File soundFile = new File("res/Boom.wav");
+        File soundFile = new File("res/LOL.wav");
         try {
             audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
