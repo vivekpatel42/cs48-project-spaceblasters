@@ -15,12 +15,12 @@ import java.util.Random;
  * @author Richard Alvarez
  */
 
-public class Game extends Canvas {
+public class Game extends Canvas implements Runnable {
 
     private ResourceManager rm;
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 800;
+    public static final int HEIGHT = 600;
+    public static final int WIDTH = 800;
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage background = null;
     private JPanel gameOver;
@@ -46,18 +46,18 @@ public class Game extends Canvas {
 
         // create a frame to contain our game
 
-        container = new JFrame("Space Blasters");
+        //container = new JFrame("Space Blasters");
 
         // get hold the content of the frame and set up the resolution of the game
 
-        JPanel panel = (JPanel) container.getContentPane();
-        panel.setPreferredSize(new Dimension(HEIGHT, WIDTH));
-        panel.setLayout(null);
+//        JPanel panel = (JPanel) container.getContentPane();
+//        panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+//        panel.setLayout(null);
 
         // setup our canvas size and put it into the content of the frame
 
-        setBounds(0, 0, HEIGHT, WIDTH);
-        panel.add(this);
+        setBounds(0, 0, WIDTH, HEIGHT);
+        //panel.add(this);
 
         // Tell AWT not to bother repainting our canvas since we're
 
@@ -67,19 +67,19 @@ public class Game extends Canvas {
 
         // finally make the window visible
 
-        container.pack();
-        container.setResizable(false);
-        container.setVisible(true);
+//        container.pack();
+//        container.setResizable(false);
+//        container.setVisible(true);
 
         // add a listener to respond to the user closing the window. If they
 
         // do we'd like to exit the game
 
-        container.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+//        container.addWindowListener(new WindowAdapter() {
+//            public void windowClosing(WindowEvent e) {
+//                System.exit(0);
+//            }
+//        });
 
         // add a key input system (defined below) to our canvas
 
@@ -90,13 +90,6 @@ public class Game extends Canvas {
         // request the focus so key events come to us
 
         requestFocus();
-
-        // create the buffering strategy which will allow AWT
-
-        // to manage our accelerated graphics
-
-        createBufferStrategy(2);
-        strategy = getBufferStrategy();
 
 
     }
@@ -143,6 +136,12 @@ public class Game extends Canvas {
     private long playerScore;
 
     public void gameLoop() {
+        // create the buffering strategy which will allow AWT
+
+        // to manage our accelerated graphics
+
+        createBufferStrategy(2);
+        strategy = getBufferStrategy();
         init();
         startGame();
         // work out how long its been since the last update, this
@@ -335,6 +334,24 @@ public class Game extends Canvas {
         leftPressed = false;
         rightPressed = false;
         firePressed = false;
+    }
+
+    @Override
+    public void run() {
+        JFrame container = new JFrame("Space Blasters");
+        Game g = new Game();
+        container.add(g);
+        container.pack();
+        container.setResizable(false);
+        container.setVisible(true);
+        g.gameLoop();
+        g.checkForHighScore();
+        container.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+        container.dispose();
     }
 
     /**
