@@ -22,6 +22,7 @@ public class Menu extends JPanel implements ActionListener{
     private JButton ReturnMenu;
     private JButton StartGame, Instructions, highScores;
     private BufferedImage menuBackground;
+    private Game g;
 
     public Menu() {
 
@@ -69,11 +70,14 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
         if (button == StartGame) {
-                /*
-                 * this will remove the first panel
-                 * and add the new panel to the frame.
-                 */
-            return;
+            frame.remove(this);
+            g = new Game();
+            frame.add(g);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            g.gameLoop();
+            g.transferFocus();
+            g.requestFocusInWindow();
+            g.setFocusable(true);
         } else if (button == Instructions) {
             frame.remove(this);
             panel = new Instructions();

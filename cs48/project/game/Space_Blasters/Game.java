@@ -46,19 +46,18 @@ public class Game extends Canvas {
 
         // create a frame to contain our game
 
-        container = new JFrame("Space Blasters");
+        //container = new JFrame("Space Blasters");
 
         // get hold the content of the frame and set up the resolution of the game
 
-        JPanel panel = (JPanel) container.getContentPane();
-        panel.setPreferredSize(new Dimension(HEIGHT, WIDTH));
-        panel.setLayout(null);
+//        JPanel panel = (JPanel) container.getContentPane();
+//        panel.setPreferredSize(new Dimension(HEIGHT, WIDTH));
+//        panel.setLayout(null);
 
 
         // setup our canvas size and put it into the content of the frame
-
         setBounds(0, 0, HEIGHT, WIDTH);
-        panel.add(this);
+        //panel.add(this);
 
         // Tell AWT not to bother repainting our canvas since we're
 
@@ -67,20 +66,21 @@ public class Game extends Canvas {
         setIgnoreRepaint(true);
 
         // finally make the window visible
-
-        container.pack();
-        container.setResizable(false);
-        container.setVisible(true);
+//
+//        container.pack();
+//        container.setResizable(false);
+//        container.setVisible(true);
 
         // add a listener to respond to the user closing the window. If they
 
         // do we'd like to exit the game
 
-        container.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+
+//        container.addWindowListener(new WindowAdapter() {
+//            public void windowClosing(WindowEvent e) {
+//                System.exit(0);
+//            }
+//        });
 
         // add a key input system (defined below) to our canvas
 
@@ -95,9 +95,6 @@ public class Game extends Canvas {
         // create the buffering strategy which will allow AWT
 
         // to manage our accelerated graphics
-
-        createBufferStrategy(2);
-        strategy = getBufferStrategy();
 
 
     }
@@ -144,6 +141,8 @@ public class Game extends Canvas {
     private long playerScore;
 
     public void gameLoop() {
+        createBufferStrategy(2);
+        strategy = getBufferStrategy();
         init();
         startGame();
         long lastLoopTime = System.currentTimeMillis();
@@ -487,6 +486,7 @@ public class Game extends Canvas {
             }
         });
         frame.setVisible(true);
+        frame.pack();
     }
 
 
@@ -508,7 +508,7 @@ public class Game extends Canvas {
             boolean loop = true;
             while (loop) {
                 g.gameLoop();
+                g.checkForHighScore();
             }
-		g.checkForHighScore();
         }
     }
