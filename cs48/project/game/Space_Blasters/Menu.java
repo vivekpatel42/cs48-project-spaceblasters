@@ -18,7 +18,9 @@ public class Menu extends JPanel implements ActionListener{
      * has no side effects.
      */
     private JFrame frame;
+    private Frame gameFrame;
     private JPanel panel;
+    private Game gameCanvas;
     private JButton ReturnMenu;
     private JButton StartGame, Instructions, highScores;
     private BufferedImage menuBackground;
@@ -69,11 +71,14 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
         if (button == StartGame) {
-                /*
-                 * this will remove the first panel
-                 * and add the new panel to the frame.
-                 */
-            return;
+            panel = (JPanel) frame.getContentPane();
+            panel.setPreferredSize(new Dimension(800, 600));
+            panel.setLayout(null);
+            gameCanvas = new Game();
+            panel.add(gameCanvas);
+            frame.pack();
+            frame.setResizable(false);
+            frame.setVisible(true);
         } else if (button == Instructions) {
             frame.remove(this);
             panel = new Instructions();
