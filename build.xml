@@ -90,10 +90,7 @@
     <target name="test" depends="compile">
 
         <junit haltonerror="no" haltonfailure="no">
-            <classpath>
-                <pathelement location="lib/junit-4.8.2.jar"/>
-                <pathelement location="${build}"/>
-            </classpath>
+            <classpath refid="classpath"/>
 
             <batchtest fork="yes">
                 <fileset dir="${src}">
