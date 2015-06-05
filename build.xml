@@ -4,6 +4,8 @@
 
     <property name="src" location="cs48/project/game/Space_Blasters"/>
     <property name="build" location="build"/>
+    <property name="lib" location="lib"/>
+    <property name="res" location="res"/>
     <property name="main" value="cs48.project.game.Space_Blasters.Menu"/>
 
     <property environment="env"/>
@@ -16,9 +18,12 @@
     <property name=" javadocDest" value=""/>
 
     <path id="classpath">
-        <fileset dir="${build}"/>
-        <fileset dir="lib" includes="*.jar"/>
-        <fileset dir="res" includes="*.wav"/>
+        <fileset dir="${lib}">
+		<include name="**/*.jar"/>
+	</fileset>
+	<fileset dir="${res}"> 
+		<include name="**/*.wav"/>
+	</fileset>
     </path>
 
     <target name="info">
@@ -27,9 +32,7 @@
 
     <target name="compile" depends="clean" description="Compiles source files into build directory">
         <mkdir dir="${build}"/>
-        <javac debug="true" srcdir="${src}" destdir="${build}" includeantruntime="false">
-            <classpath refid="classpath"/>
-        </javac>
+        <javac debug="true" srcdir="${src}" destdir="${build}" classpathref="classpath" includeantruntime="false"/>
     </target>
 
     <target name="clean" description="Cleans up the build directory">
