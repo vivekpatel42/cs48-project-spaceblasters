@@ -18,11 +18,12 @@ public class Menu extends JPanel implements ActionListener{
      * has no side effects.
      */
     private JFrame frame;
+    private Frame gameFrame;
     private JPanel panel;
+    private Game gameCanvas;
     private JButton ReturnMenu;
     private JButton StartGame, Instructions, highScores;
     private BufferedImage menuBackground;
-    private Game g;
 
     public Menu() {
 
@@ -70,14 +71,14 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
         if (button == StartGame) {
-            frame.remove(this);
-            g = new Game();
-            frame.add(g);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            g.gameLoop();
-            g.transferFocus();
-            g.requestFocusInWindow();
-            g.setFocusable(true);
+            panel = (JPanel) frame.getContentPane();
+            panel.setPreferredSize(new Dimension(800, 600));
+            panel.setLayout(null);
+            gameCanvas = new Game();
+            panel.add(gameCanvas);
+            frame.pack();
+            frame.setResizable(false);
+            frame.setVisible(true);
         } else if (button == Instructions) {
             frame.remove(this);
             panel = new Instructions();
