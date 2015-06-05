@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by Richard Alvarez on 4/30/2015.
  */
 
-public class Menu extends JPanel implements ActionListener{
+public class Menu extends JPanel implements ActionListener, Runnable{
     /*
      * Creating an object of JFrame instead of extending it
      * has no side effects.
@@ -59,6 +59,7 @@ public class Menu extends JPanel implements ActionListener{
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setContentPane(this);
         frame.setSize(800, 600);
+        new Thread(new MenuMusic()).start();
         frame.setVisible(true);
     }
 
@@ -66,6 +67,11 @@ public class Menu extends JPanel implements ActionListener{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(menuBackground, 0, 0, null);
+    }
+
+    @Override
+    public void run() {
+        new Thread(new Menu()).start();
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -101,8 +107,6 @@ public class Menu extends JPanel implements ActionListener{
          * by calling the function, method or constructor, responsible
          * for creating and displaying your GUI.
          */
-       Thread music =  new Thread(new MenuMusic());
-        music.start();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
