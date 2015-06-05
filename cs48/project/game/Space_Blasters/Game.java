@@ -1,7 +1,9 @@
 package cs48.project.game.Space_Blasters;
 
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
