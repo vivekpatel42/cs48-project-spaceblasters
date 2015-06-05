@@ -26,6 +26,8 @@ public class GameMusic implements Runnable {
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            while (!Thread.currentThread().isInterrupted());
+            return;
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {

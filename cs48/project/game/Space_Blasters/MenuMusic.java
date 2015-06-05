@@ -9,11 +9,18 @@ import java.io.IOException;
  */
 public class MenuMusic implements Runnable {
 
+    private volatile boolean done = false;
     public static void main(String args[]){
         new Thread(new GameMusic()).start();
 
 
     }
+    public void interrupt (){}
+    public void stopExecuting() {
+
+        this.done = true;
+    }
+
     @Override
     public void run() {
 // from a wave File
@@ -25,6 +32,8 @@ public class MenuMusic implements Runnable {
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            while (!Thread.currentThread().isInterrupted());
+            clip.stop();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -32,7 +41,6 @@ public class MenuMusic implements Runnable {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-
 
     }
 

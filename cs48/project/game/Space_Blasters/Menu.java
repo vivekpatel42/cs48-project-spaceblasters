@@ -24,10 +24,13 @@ public class Menu extends JPanel implements ActionListener{
     private JButton ReturnMenu;
     private JButton StartGame, Instructions, highScores;
     private BufferedImage menuBackground;
+    private Thread music;
 
     public Menu() {
 
         super();
+        music =  new Thread(new MenuMusic());
+        music.start();
         panel = new JPanel();
         panel.setBackground(Color.black);
         ReturnMenu = new JButton("BACK");
@@ -71,6 +74,7 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
         if (button == StartGame) {
+            music.interrupt();
             new Thread(new Game()).start();
         } else if (button == Instructions) {
             frame.remove(this);
@@ -101,8 +105,7 @@ public class Menu extends JPanel implements ActionListener{
          * by calling the function, method or constructor, responsible
          * for creating and displaying your GUI.
          */
-       Thread music =  new Thread(new MenuMusic());
-        music.start();
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

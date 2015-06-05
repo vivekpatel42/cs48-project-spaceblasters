@@ -25,6 +25,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage background = null;
     private JPanel gameOver;
     private JFrame container;
+    private Thread music;
 
     public void init() {
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -340,6 +341,8 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         JFrame container = new JFrame("Space Blasters");
         Game g = new Game();
+        music = new Thread(new GameMusic());
+        music.start();
         container.add(g);
         container.pack();
         container.setResizable(false);
