@@ -29,7 +29,7 @@ public class Menu extends JPanel implements ActionListener{
     public Menu() {
 
         super();
-        music =  new Thread(new MenuMusic());
+        music =  new Thread(new GameMusic());
         music.start();
         panel = new JPanel();
         panel.setBackground(Color.black);
@@ -74,7 +74,6 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
         if (button == StartGame) {
-            music.interrupt();
             new Thread(new Game()).start();
         } else if (button == Instructions) {
             frame.remove(this);
