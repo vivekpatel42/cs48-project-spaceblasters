@@ -472,6 +472,7 @@ public class Game extends Canvas implements Runnable {
         for (int i = 0; i < 10; i++) {
             if (rm.getMainPlayer().getScore() > scoreList[i]) {
                 writeNewHighScore(hs, i);
+                break;
             }
         }
     }
@@ -483,7 +484,6 @@ public class Game extends Canvas implements Runnable {
     private void writeNewHighScore(final HighScores hs, int i) {
         final JFrame frame = new JFrame("New High Score!");
         JPanel highScoreEntry = new JPanel();
-        highScoreEntry.setSize(new Dimension(640, 480));
         highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
         JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
         JLabel pressEnter = new JLabel("Enter your name and press enter to submit your score.");
@@ -498,7 +498,7 @@ public class Game extends Canvas implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 String name = enterName.getText();
                 hs.writeHighScore(name, rm.getMainPlayer().getScore());
-                frame.setVisible(false);
+                frame.dispose();
             }
         });
         frame.setVisible(true);
