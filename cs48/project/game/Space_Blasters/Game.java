@@ -191,13 +191,17 @@ public class Game extends Canvas implements Runnable {
 
 
             //LOOPS FOR THE BOSS TO SPAWN AND ACT
-            if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound != null)) {
+            if (!waitingForKeyPress && (wave == 3 || wave == 7 || wave == 12 || NotFound != null)) {
                 if (NotFound == null) {
                     NotFound = new Boss();
                     new Thread(new FIRINGMALASER()).start();
                 }
                 if (wave == 7) {
                     NotFound.firingInterval = 350;
+                }
+
+                if (wave == 12) {
+                    NotFound.firingInterval = 450;
                 }
                 NotFound.CalculateMove();
                 NotFound.TryToFire(rm);
@@ -317,6 +321,7 @@ public class Game extends Canvas implements Runnable {
             // and flip the buffer over
             g.dispose();
             strategy.show();
+
             // finally pause for a bit. Note: this should run us at about
             try {
                 Thread.sleep(12);
@@ -343,8 +348,6 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         JFrame container = new JFrame("Space Blasters");
         Game g = new Game();
-        music = new Thread(new GameMusic());
-        music.start();
         container.add(g);
         container.pack();
         container.setResizable(false);
