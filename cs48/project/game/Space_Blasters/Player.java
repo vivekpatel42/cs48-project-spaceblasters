@@ -50,11 +50,12 @@ public class Player extends SpriteBase {
     public long getScore() {
         return this.score;
     }
+    public void setScore(long score) { score = this.score;}
 
     public int getHp() {
         return hp;
     }
-
+    public void setHp(int hp) { hp = this.hp;}
 
     public void increaseScore(long score) {
         this.score += score;

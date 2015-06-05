@@ -50,6 +50,8 @@ public class Enemy extends SpriteBase {
 		}
 	}
 
+    public double getXdirection() { return Xdirection;}
+    public double getYdirection() { return Ydirection;}
 	public Projectile TryToFire (){
 		// check that we have waiting long enough to fire
 		if (System.currentTimeMillis() - lastFire < firingInterval) {

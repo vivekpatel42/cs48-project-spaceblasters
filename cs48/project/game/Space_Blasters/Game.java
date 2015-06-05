@@ -1,7 +1,9 @@
 package cs48.project.game.Space_Blasters;
 
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -15,21 +17,22 @@ import java.util.Random;
  * @author Richard Alvarez
  */
 
-public class Game extends Canvas {
+public class Game extends Canvas implements Runnable {
 
     private ResourceManager rm;
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 800;
+    public static final int HEIGHT = 600;
+    public static final int WIDTH = 800;
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage background = null;
     private JPanel gameOver;
     private JFrame container;
+    private Thread music;
 
     public void init() {
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            //   spriteSheet = loader.loadImage("Sprite.png");
+            //   sp riteSheet = loader.loadImage("Sprite.png");
             background = loader.loadImage("background.png");
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,19 +49,18 @@ public class Game extends Canvas {
 
         // create a frame to contain our game
 
-        container = new JFrame("Space Blasters");
+        //container = new JFrame("Space Blasters");
 
         // get hold the content of the frame and set up the resolution of the game
 
-        JPanel panel = (JPanel) container.getContentPane();
-        panel.setPreferredSize(new Dimension(HEIGHT, WIDTH));
-        panel.setLayout(null);
-
+//        JPanel panel = (JPanel) container.getContentPane();
+//        panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+//        panel.setLayout(null);
 
         // setup our canvas size and put it into the content of the frame
 
-        setBounds(0, 0, HEIGHT, WIDTH);
-        panel.add(this);
+        setBounds(0, 0, WIDTH, HEIGHT);
+        //panel.add(this);
 
         // Tell AWT not to bother repainting our canvas since we're
 
@@ -68,19 +70,19 @@ public class Game extends Canvas {
 
         // finally make the window visible
 
-        container.pack();
-        container.setResizable(false);
-        container.setVisible(true);
+//        container.pack();
+//        container.setResizable(false);
+//        container.setVisible(true);
 
         // add a listener to respond to the user closing the window. If they
 
         // do we'd like to exit the game
 
-        container.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+//        container.addWindowListener(new WindowAdapter() {
+//            public void windowClosing(WindowEvent e) {
+//                System.exit(0);
+//            }
+//        });
 
         // add a key input system (defined below) to our canvas
 
@@ -92,19 +94,12 @@ public class Game extends Canvas {
 
         requestFocus();
 
-        // create the buffering strategy which will allow AWT
-
-        // to manage our accelerated graphics
-
-        createBufferStrategy(2);
-        strategy = getBufferStrategy();
-
 
     }
 
 
     /**
-     * The stragey that allows us to use accelerate page flipping
+     * The stragey that allows us to use accelerated page flipping
      */
     private BufferStrategy strategy;
     /**
@@ -144,29 +139,32 @@ public class Game extends Canvas {
     private long playerScore;
 
     public void gameLoop() {
+        // create the buffering strategy which will allow AWT
+
+        // to manage our accelerated graphics
+
+        createBufferStrategy(2);
+        strategy = getBufferStrategy();
         init();
         startGame();
+        // work out how long its been since the last update, this
+        // will be used to calculate how far the entities should
+        // move this loop
         long lastLoopTime = System.currentTimeMillis();
         Boss NotFound = null;
-        int wave= 0;
+        int wave = 0;
         Random rand = new Random();
         gameRunning = true;
-        rm = new ResourceManager();
         waitingForKeyPress = true;
         // keep looping round til the game ends
         while (gameRunning) {
-            // work out how long its been since the last update, this
-            // will be used to calculate how far the entities should
-            // move this loop
 
             long delta = System.currentTimeMillis() - lastLoopTime;
             lastLoopTime = System.currentTimeMillis();
 
             // Get hold of a graphics context for the accelerated
-
-            // surface and blank it out
-
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+            // surface and blank it out
             g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             g.drawImage(background, 0, 0, null);
             playerScore = rm.getMainPlayer().getScore();
@@ -179,48 +177,49 @@ public class Game extends Canvas {
             }
             //Generate random meteors
             int meteor = rand.nextInt(1000);
-            if (!waitingForKeyPress && meteor <=4 && wave > 5){
-                Projectile Meteor = new Projectile(rand.nextInt(700), 0, rand.nextInt(2)+7);
-                Meteor.setDirection(rand.nextDouble()-.5);
+            if (!waitingForKeyPress && meteor <= 4 && wave > 5) {
+                Projectile Meteor = new Projectile(rand.nextInt(700), 0, rand.nextInt(2) + 7);
+                Meteor.setDirection(rand.nextDouble() - .5);
                 rm.getProjectileArr().add(Meteor);
 
             }
 
 
-            if (!waitingForKeyPress){//asks resource manager to remove bullets out of frame
+            if (!waitingForKeyPress) {//asks resource manager to remove bullets out of frame
                 rm.CleanBullets();
             }
 
 
             //LOOPS FOR THE BOSS TO SPAWN AND ACT
-            if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound!= null)){
+            if (!waitingForKeyPress && (wave == 3 || wave == 7 || NotFound != null)) {
                 if (NotFound == null) {
                     NotFound = new Boss();
                     new Thread(new FIRINGMALASER()).start();
                 }
-                if (wave ==7){
+                if (wave == 7) {
                     NotFound.firingInterval = 350;
                 }
-                    NotFound.CalculateMove();
-                    NotFound.TryToFire(rm);
-                    g.drawImage(NotFound.getImage(), null, (int) NotFound.getXPos(), (int) NotFound.getYPos());
+                NotFound.CalculateMove();
+                NotFound.TryToFire(rm);
+                g.drawImage(NotFound.getImage(), null, (int) NotFound.getXPos(), (int) NotFound.getYPos());
                 //COLLISION FOR BOSS
                 boolean isDead = false;
-                    ArrayList<Projectile> toDeleteShot = new ArrayList<Projectile>(); //COLLISION DETECTION FOR FRIENDLY PROJECTILES TO ENEMIES
-                    for (int i = 0; i < rm.getProjectileArr().size(); i++) {
-                        if (rm.getProjectileArr().get(i).collidesWith(NotFound) && rm.getProjectileArr().get(i).isFriendly()) {
-                            toDeleteShot.add(rm.getProjectileArr().get(i));
-                            if (NotFound.gotShot())
-                                isDead = true;
-                        }
+                ArrayList<Projectile> toDeleteShot = new ArrayList<Projectile>(); //COLLISION DETECTION FOR FRIENDLY PROJECTILES TO ENEMIES
+                for (int i = 0; i < rm.getProjectileArr().size(); i++) {
+                    if (rm.getProjectileArr().get(i).collidesWith(NotFound) && rm.getProjectileArr().get(i).isFriendly()) {
+                        toDeleteShot.add(rm.getProjectileArr().get(i));
+                        if (NotFound.gotShot())
+                            isDead = true;
                     }
-                    for (int i = 0; i < toDeleteShot.size(); i++) {
-                        rm.getProjectileArr().remove(toDeleteShot.get(i));
-                    }
-                    if (isDead) {
-                        NotFound = null;
-                        rm.getMainPlayer().increaseScore(25000);
-                    }
+                }
+                for (int i = 0; i < toDeleteShot.size(); i++) {
+                    rm.getProjectileArr().remove(toDeleteShot.get(i));
+                }
+                if (isDead) {
+                    NotFound = null;
+                    new Thread(new Wilhelm()).start();
+                    rm.getMainPlayer().increaseScore(25000);
+                }
             }
 
             // resolve the movement of the ship. First assume the ship
@@ -299,6 +298,7 @@ public class Game extends Canvas {
             //Check for Game ending condition
             if (rm.checkForGameOver()) {
                 gameRunning = false;
+                new Thread(new ExplosionAudio()).start();
                 BufferedImageLoader loader = new BufferedImageLoader();
                 try {
                     background = loader.loadImage("GameOver.png");
@@ -315,10 +315,8 @@ public class Game extends Canvas {
             // finally, we've completed drawing so clear up the graphics
 
             // and flip the buffer over
-
             g.dispose();
             strategy.show();
-
             // finally pause for a bit. Note: this should run us at about
             try {
                 Thread.sleep(12);
@@ -327,7 +325,6 @@ public class Game extends Canvas {
         }
 
     }
-
 
     /**
      * Start a fresh game, this should clear out any old data and
@@ -340,6 +337,26 @@ public class Game extends Canvas {
         leftPressed = false;
         rightPressed = false;
         firePressed = false;
+    }
+
+    @Override
+    public void run() {
+        JFrame container = new JFrame("Space Blasters");
+        Game g = new Game();
+        music = new Thread(new GameMusic());
+        music.start();
+        container.add(g);
+        container.pack();
+        container.setResizable(false);
+        container.setVisible(true);
+        g.gameLoop();
+        g.checkForHighScore();
+        container.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+        container.dispose();
     }
 
     /**
@@ -454,20 +471,24 @@ public class Game extends Canvas {
         }
     }
 
-        protected void checkForHighScore() {
-            HighScores hs = new HighScores();
-            long[] scoreList = hs.getScoreList();
-            for (int i = 0; i < 10; i++) {
-                if (rm.getMainPlayer().getScore() > scoreList[i]) {
-                    writeNewHighScore(hs, i);
-                }
+    protected void checkForHighScore() {
+        HighScores hs = new HighScores();
+        long[] scoreList = hs.getScoreList();
+        for (int i = 0; i < 10; i++) {
+            if (rm.getMainPlayer().getScore() > scoreList[i]) {
+                writeNewHighScore(hs, i);
+                break;
             }
         }
+    }
+
+    public void close() {
+        this.container.setVisible(false);
+    }
 
     private void writeNewHighScore(final HighScores hs, int i) {
         final JFrame frame = new JFrame("New High Score!");
         JPanel highScoreEntry = new JPanel();
-        highScoreEntry.setPreferredSize(new Dimension(640, 480));
         highScoreEntry.setLayout(new BoxLayout(highScoreEntry, BoxLayout.PAGE_AXIS));
         JLabel newHighScore = new JLabel("Your score, " + rm.getMainPlayer().getScore() + ", is the new #" + (i + 1) + " score!");
         JLabel pressEnter = new JLabel("Enter your name and press enter to submit your score.");
@@ -476,46 +497,30 @@ public class Game extends Canvas {
         highScoreEntry.add(pressEnter);
         highScoreEntry.add(enterName);
         frame.add(highScoreEntry);
+        frame.pack();
         enterName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = enterName.getText();
                 hs.writeHighScore(name, rm.getMainPlayer().getScore());
-                frame.setVisible(false);
+                frame.dispose();
             }
         });
         frame.setVisible(true);
     }
 
-/*
+
     /**
-         * The entry point into the game. We'll simply create an
-         * instance of class which will start the display and game
-         * loop.
-         *
-         * @param args The arguments that are passed into our game
-         */
-    /*
-        public static void main(String ... args) {
-            Game g = new Game();
-            new Thread(new GameMusic()).start();
-            // Start the main game loop, note: this method will not
-
-            // return until the game has finished running. Hence we are
-
-            // using the actual main thread to run the game.
-            boolean loop = true;
-            while (loop) {
-                g.gameLoop();
-                g.checkForHighScore();
-            }
-        }
-*/
-    public static void go() {
+     * The entry point into the game. We'll simply create an
+     * instance of class which will start the display and game
+     * loop.
+     *
+     * @param args The arguments that are passed into our game
+     */
+    public static void main(String... args) {
         Game g = new Game();
         new Thread(new GameMusic()).start();
         // Start the main game loop, note: this method will not
-
 
         // return until the game has finished running. Hence we are
 
@@ -523,12 +528,13 @@ public class Game extends Canvas {
         boolean loop = true;
         while (loop) {
             g.gameLoop();
-            g.checkForHighScore();
-            //loop = false;
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            loop = false;
         }
-
-    }
-    public static void main(String[] args) {
-        Game.go();
+        g.checkForHighScore();
     }
 }

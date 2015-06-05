@@ -48,9 +48,11 @@ public abstract class SpriteBase {
     public double getYPos() {
         return yPos;
     }
+    public void setyPos(double yPos) { yPos=this.yPos;}
     public double getXPos() {
         return xPos;
     }
+    public void setxPos(double xPos) { xPos=this.xPos;}
 
 
     /**

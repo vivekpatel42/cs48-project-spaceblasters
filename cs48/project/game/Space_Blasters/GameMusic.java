@@ -2,7 +2,6 @@ package cs48.project.game.Space_Blasters;
 
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -20,12 +19,14 @@ public class GameMusic implements Runnable {
 // from a wave File
         Clip clip;
         AudioInputStream audioIn;
-        File soundFile = new File("res/BlastersTheme.wav");
+//        File soundFile = new File("res/BlastersTheme.wav");
         try {
-            audioIn = AudioSystem.getAudioInputStream(soundFile);
+            audioIn = AudioSystem.getAudioInputStream(this.getClass().getResource("/res/BlastersTheme.wav"));
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            while (!Thread.currentThread().isInterrupted());
+            return;
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
