@@ -15,9 +15,9 @@
     <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc"/>
     <property name=" javadocDest" value=""/>
 
-    <path id="Space Blasters.classpath">
-        <pathelement location="${build}"/>
-        <pathelement location="${src}"/>
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar"/>
+        <fileset dir="res" includes="*.wav"/>
     </path>
 
     <target name="info">
@@ -26,7 +26,9 @@
 
     <target name="compile" depends="clean" description="Compiles source files into build directory">
         <mkdir dir="${build}"/>
-        <javac srcdir="${src}" destdir="${build}"/>
+        <javac srcdir="${src}" destdir="${build}">
+            <classpath refid="classpath"/>
+        </javac>
     </target>
 
     <target name="clean" description="Cleans up the build directory">
