@@ -16,6 +16,7 @@
     <property name=" javadocDest" value=""/>
 
     <path id="classpath">
+        <fileset dir="${build}"/>
         <fileset dir="lib" includes="*.jar"/>
         <fileset dir="res" includes="*.wav"/>
     </path>
@@ -26,7 +27,7 @@
 
     <target name="compile" depends="clean" description="Compiles source files into build directory">
         <mkdir dir="${build}"/>
-        <javac srcdir="${src}" destdir="${build}">
+        <javac debug="true" srcdir="${src}" destdir="${build}" includeantruntime="false">
             <classpath refid="classpath"/>
         </javac>
     </target>
@@ -36,7 +37,8 @@
     </target>
 
     <target name="run" depends="compile" description="Runs the Space Blasters game">
-        <java classname="${main}" classpath="${build}" failonerror="true" fork="yes">
+        <java classname="${main}"  classpath="${build}" failonerror="true" fork="yes">
+            <classpath refid="classpath"/>
         </java>
     </target>
 

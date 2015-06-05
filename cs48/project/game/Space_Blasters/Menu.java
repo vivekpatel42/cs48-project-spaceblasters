@@ -71,11 +71,6 @@ public class Menu extends JPanel implements ActionListener{
         g.drawImage(menuBackground, 0, 0, null);
     }
 
-    @Override
-    public void run() {
-        new Thread(new Menu()).start();
-    }
-
     public void actionPerformed(ActionEvent ae) {
         JButton button = (JButton) ae.getSource();
         if (button == StartGame) {

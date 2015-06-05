@@ -1,7 +1,6 @@
 package cs48.project.game.Space_Blasters;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -20,9 +19,9 @@ public class FIRINGMALASER implements Runnable {
         // from a wave File
         Clip clip;
         AudioInputStream audioIn;
-        File soundFile = new File("res/LOL.wav");
+//        File soundFile = new File("res/LOL.wav");
         try {
-            audioIn = AudioSystem.getAudioInputStream(soundFile);
+            audioIn = AudioSystem.getAudioInputStream(this.getClass().getResource("/res/LOL.wav"));
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.loop(0);
