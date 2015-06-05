@@ -9,10 +9,20 @@ import java.io.IOException;
  */
 public class GameMusic implements Runnable {
 
+	private volatile boolean done = false;
+	
     public static void main(String args[]){
         new Thread(new GameMusic()).start();
 
 
+    }
+
+	public void interrupt() {
+    }
+
+    public void stopExecuting() {
+
+        this.done = true;
     }
     @Override
     public void run() {
@@ -26,7 +36,7 @@ public class GameMusic implements Runnable {
             clip.open(audioIn);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             while (!Thread.currentThread().isInterrupted());
-            return;
+            clip.stop();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
