@@ -18,11 +18,8 @@
     <property name=" javadocDest" value=""/>
 
     <path id="classpath">
-        <fileset dir="${lib}">
+    	<fileset dir="${lib}">
 		<include name="**/*.jar"/>
-	</fileset>
-	<fileset dir="${res}"> 
-		<include name="**/*.wav"/>
 	</fileset>
     </path>
 
@@ -30,7 +27,7 @@
         <echo>Welcome to the Space Blasters project!</echo>
     </target>
 
-    <target name="compile" depends="clean" description="Compiles source files into build directory">
+    <target name="compile" depends="clean, copy" description="Compiles source files into build directory">
         <mkdir dir="${build}"/>
         <javac debug="true" srcdir="${src}" destdir="${build}" classpathref="classpath" includeantruntime="false"/>
     </target>
@@ -39,8 +36,26 @@
         <delete dir="${build}" quiet="true"/>
     </target>
 
+	<target name="copy" description="Copies resource files to build directory">
+		<copy todir="${build}/lib">
+			<fileset dir="${lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+                <copy todir="${build}/res">
+                        <fileset dir="${res}">
+                                <include name="**/*.wav"/>
+                        </fileset>
+                </copy>
+		<copy todir="${build}/cs48/project/game/Space_Blasters">
+			<fileset dir="${src}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	</target>
+
     <target name="run" depends="compile" description="Runs the Space Blasters game">
-        <java classname="${main}"  classpath="${build}" failonerror="true" fork="yes">
+        <java classname="${main}" classpath="${build}" failonerror="true" fork="true">
             <classpath refid="classpath"/>
         </java>
     </target>
