@@ -353,7 +353,6 @@ public class Game extends Canvas implements Runnable {
         container.setResizable(false);
         container.setVisible(true);
         g.gameLoop();
-	music.interrupt();
         g.checkForHighScore();
         container.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
