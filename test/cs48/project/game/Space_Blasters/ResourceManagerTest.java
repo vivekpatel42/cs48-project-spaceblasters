@@ -10,10 +10,10 @@ import static org.junit.Assert.assertTrue;
 
 /** 
 * ResourceManager Tester. 
-* 
-* @author <Authors name> 
-* @since <pre>���� 5, 2015</pre> 
-* @version 1.0 
+*
+ * @author <Jingzhou Xue>
+ * @since <pre>May.29th 2015</pre>
+ * @version 1.0
 */ 
 public class ResourceManagerTest {
 

@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import cs48.project.game.Space_Blasters.*;
 /** 
 * Player Tester. 
-* 
-* @author <Authors name> 
-* @since <pre>���� 5, 2015</pre> 
-* @version 1.0 
-*/ 
+*
+ * @author <Jingzhou Xue>
+ * @since <pre>May.29th 2015</pre>
+ * @version 1.0
+ */
 public class PlayerTest { 
 
 /** 
